@@ -1,0 +1,16 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: cirrusci/flutter
+    steps:
+      - checkout
+      - run: 
+          name: Flutter Doctor
+          command: flutter doctor
+      - run: 
+          name: Flutter Test
+          command: flutter test
+      - run: 
+          name: Flutter Build APK
+          command: flutter -v build apk
