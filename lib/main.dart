@@ -9,15 +9,38 @@ class MainApp extends StatelessWidget {
     return MaterialApp(
       title: 'internStack',
       theme: ThemeData(
-        primarySwatch: Colors.red,
+        primarySwatch: Colors.deepOrange,
       ),
-      home: HomePage(title: 'internStack'),
+      home: EntryPage(),
     );
   }
 }
 
-class HomePage extends StatelessWidget {
-  HomePage({Key key, this.title}) : super(key: key);
+class EntryPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.black,
+      body: ListView(
+        children: [
+          Image.asset('assets/entry_logo.png'),
+          RaisedButton(
+            child: Text('Enter'),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => ListingPage(title: 'internStack')),
+              );          
+            },
+          ),
+        ]
+      ),
+    );
+  }
+}
+
+class ListingPage extends StatelessWidget {
+  ListingPage({Key key, this.title}) : super(key: key);
   
   final String title;
 
