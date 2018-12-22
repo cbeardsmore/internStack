@@ -9,7 +9,7 @@ class MainApp extends StatelessWidget {
     return MaterialApp(
       title: 'internStack',
       theme: ThemeData(
-        primarySwatch: Colors.red,
+        primarySwatch: Colors.deepOrange,
       ),
       home: EntryPage(),
     );
