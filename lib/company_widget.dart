@@ -8,9 +8,7 @@ class CompanyWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        theme: ThemeData(primarySwatch: Colors.blue),
-        home: Scaffold(
+    return new Scaffold(
           appBar: AppBar(
             title: Text(company.name),
           ),
@@ -32,7 +30,7 @@ class CompanyWidget extends StatelessWidget {
                   ))
             ],
           ),
-        ));
+        );
   }
 }
 
@@ -63,7 +61,7 @@ class TitleSection extends StatelessWidget {
         Container(
           padding: const EdgeInsets.only(bottom: 8.0),
           child: Text(
-            company.name + 'Office',
+            "${company.name} Office",
             style: TextStyle(
               fontWeight: FontWeight.bold,
             ),
