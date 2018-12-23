@@ -16,7 +16,6 @@ class ListingPage extends StatelessWidget {
             Container(
               child: IconButton(
                 icon: Icon(Icons.person_outline, color: Colors.white),
-                color: Colors.white,
                 onPressed: () {
                 Navigator.push(
                   context,
