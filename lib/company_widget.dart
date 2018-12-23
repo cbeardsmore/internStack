@@ -21,7 +21,7 @@ class CompanyWidget extends StatelessWidget {
                 fit: BoxFit.cover,
               ),
               TitleSection(company),
-              ButtonSection(),
+              ButtonSection(Theme.of(context).primaryColor),
               Container(
                   padding: const EdgeInsets.all(32.0),
                   child: Text(
@@ -79,11 +79,12 @@ class TitleSection extends StatelessWidget {
 /* ****************** Button ****************** */
 
 class ButtonSection extends StatelessWidget {
-  Color color;
+  final Color color;
+
+  ButtonSection(this.color);
 
   @override
   Widget build(BuildContext context) {
-    color = Theme.of(context).primaryColor;
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: <Widget>[
