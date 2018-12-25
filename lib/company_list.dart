@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'company.dart';
 import 'company_widget.dart';
 
@@ -27,32 +28,39 @@ const companies = const <Company>[
 ];
 
 class CompanyList extends StatelessWidget {
-  final List<Company> companies;
-
-  CompanyList(this.companies);
 
   @override
   Widget build(BuildContext context) {
     return _buildList(context);
   }
 
-  ListView _buildList(context) {
-    return ListView.builder(
-      itemCount: companies.length,
-      itemBuilder: (context, int) {
-        var company = companies[int];
-        return ListTile(
-          leading: new CircleAvatar(
-            child: new Text(company.name[0]),
-          ),
-          onTap: (){ 
-            Navigator.push(context, MaterialPageRoute(builder: (context) => CompanyWidget(company)),
-            );
-          },
-          title: Text(company.name),
-          subtitle: Text(company.location),
+  StreamBuilder _buildList(BuildContext context) {
+    return StreamBuilder(
+        stream: Firestore.instance.collection('companies').snapshots(),
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) return const Text('Loading...');
+
+          return ListView.builder(
+            itemCount: snapshot.data.documents.length,
+            itemBuilder: (context, index) =>
+                _buildListItem(context, snapshot.data.documents[index]),
+          );
+        });
+  }
+
+  ListTile _buildListItem(BuildContext context, DocumentSnapshot company) {
+    return ListTile(
+      leading: new CircleAvatar(
+        child: new Text(company['name'][0]),
+      ),
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => CompanyWidget(company)),
         );
       },
+      title: Text(company['name']),
+      subtitle: Text(company['location']),
     );
   }
 }

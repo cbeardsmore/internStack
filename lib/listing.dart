@@ -26,7 +26,7 @@ class ListingPage extends StatelessWidget {
               ),
             ),
         ]),
-      body: CompanyList(companies),
+      body: CompanyList(),
     );
   }
 }
