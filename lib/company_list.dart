@@ -3,30 +3,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'company.dart';
 import 'company_widget.dart';
 
-const companies = const <Company>[
-  const Company(
-      name: 'Atlassian',
-      location: 'Sydney',
-      image: 'assets/atlassian.webp',
-      description:
-          'Atlassian Corporation Plc is an Australian enterprise software company that develops products'),
-  const Company(
-      name: 'Optiver',
-      location: 'Sydney',
-      image: 'assets/atlassian.webp',
-      description: 'Optiver description...'),
-  const Company(
-      name: 'VGW',
-      location: 'Perth',
-      image: 'assets/atlassian.webp',
-      description: 'VGW description...'),
-  const Company(
-      name: 'Woodside',
-      location: 'Perth',
-      image: 'assets/atlassian.webp',
-      description: 'Woodside description...'),
-];
-
 class CompanyList extends StatelessWidget {
 
   @override
@@ -42,16 +18,27 @@ class CompanyList extends StatelessWidget {
 
           return ListView.builder(
             itemCount: snapshot.data.documents.length,
-            itemBuilder: (context, index) =>
-                _buildListItem(context, snapshot.data.documents[index]),
+            itemBuilder: (context, index) {
+                Company company = _documentToCompany(snapshot.data.documents[index]);
+                return _buildListItem(context, company);
+            }
           );
         });
   }
 
-  ListTile _buildListItem(BuildContext context, DocumentSnapshot company) {
+  Company _documentToCompany(DocumentSnapshot snapshot) {
+    return Company(
+      name: snapshot['name'],
+      location: snapshot['location'],
+      image: snapshot['image'],
+      description: snapshot['description']
+    );
+  }
+
+  ListTile _buildListItem(BuildContext context, Company company) {
     return ListTile(
       leading: new CircleAvatar(
-        child: new Text(company['name'][0]),
+        child: new Text(company.name[0]),
       ),
       onTap: () {
         Navigator.push(
@@ -59,8 +46,8 @@ class CompanyList extends StatelessWidget {
           MaterialPageRoute(builder: (context) => CompanyWidget(company)),
         );
       },
-      title: Text(company['name']),
-      subtitle: Text(company['location']),
+      title: Text(company.name),
+      subtitle: Text(company.location),
     );
   }
 }

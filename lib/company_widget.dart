@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'company.dart';
 
 class CompanyWidget extends StatelessWidget {
-  final DocumentSnapshot company;
+  final Company company;
 
   CompanyWidget(this.company);
 
@@ -11,12 +10,12 @@ class CompanyWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return new Scaffold(
           appBar: AppBar(
-            title: Text(company['name']),
+            title: Text(company.name),
           ),
           body: ListView(
             children: <Widget>[
               Image.asset(
-                company['image'],
+                company.image,
                 width: 600.0,
                 height: 240.0,
                 fit: BoxFit.cover,
@@ -26,7 +25,7 @@ class CompanyWidget extends StatelessWidget {
               Container(
                   padding: const EdgeInsets.all(32.0),
                   child: Text(
-                    company['description'],
+                    company.description,
                     softWrap: true,
                   ))
             ],
@@ -38,7 +37,7 @@ class CompanyWidget extends StatelessWidget {
 /* ****************** Title ****************** */
 
 class TitleSection extends StatelessWidget {
-  final DocumentSnapshot company;
+  final Company company;
 
   TitleSection(this.company);
 
@@ -62,14 +61,14 @@ class TitleSection extends StatelessWidget {
         Container(
           padding: const EdgeInsets.only(bottom: 8.0),
           child: Text(
-            "${company['name']} Office",
+            "${company.name} Office",
             style: TextStyle(
               fontWeight: FontWeight.bold,
             ),
           ),
         ),
         Text(
-          company['location'],
+          company.location,
           style: TextStyle(color: Colors.grey),
         ),
       ],
