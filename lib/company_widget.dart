@@ -14,7 +14,7 @@ class CompanyWidget extends StatelessWidget {
       ),
       body: ListView(
         children: <Widget>[
-          Image.asset(
+          Image.network(
             company.image,
             width: 600.0,
             height: 240.0,
