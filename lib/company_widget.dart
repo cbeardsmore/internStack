@@ -15,7 +15,7 @@ class CompanyWidget extends StatelessWidget {
       body: ListView(
         children: <Widget>[
           Image.asset(
-            'assets/' + company.image,
+            company.image,
             width: 600.0,
             height: 240.0,
             fit: BoxFit.cover,
