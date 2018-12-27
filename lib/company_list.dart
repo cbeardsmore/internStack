@@ -30,6 +30,7 @@ class CompanyList extends StatelessWidget {
         name: snapshot['name'],
         location: snapshot['location'],
         image: snapshot['image'],
+        logo: snapshot['logo'],
         description: snapshot['description']);
   }
 
@@ -41,7 +42,7 @@ class CompanyList extends StatelessWidget {
         padding: const EdgeInsets.all(8.0),
         child: ListTile(
           leading: new CircleAvatar(
-            backgroundImage: AssetImage('assets/logo/' + company.name + '.png'),
+            backgroundImage: NetworkImage(company.logo),
             radius: 34,
           ),
           onTap: () {
