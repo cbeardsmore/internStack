@@ -9,28 +9,23 @@ class CompanyWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-          appBar: AppBar(
-            title: Text(company.name),
+      appBar: AppBar(
+        title: Text(company.name),
+      ),
+      body: ListView(
+        children: <Widget>[
+          Image.asset(
+            'assets/' + company.image,
+            width: 600.0,
+            height: 240.0,
+            fit: BoxFit.cover,
           ),
-          body: ListView(
-            children: <Widget>[
-              Image.asset(
-                'assets/' + company.image,
-                width: 600.0,
-                height: 240.0,
-                fit: BoxFit.cover,
-              ),
-              TitleSection(company),
-              ButtonSection(Theme.of(context).primaryColor),
-              Container(
-                  padding: const EdgeInsets.all(32.0),
-                  child: Text(
-                    company.description,
-                    softWrap: true,
-                  ))
-            ],
-          ),
-        );
+          TitleSection(company),
+          TextSection(company),
+        ],
+      ),
+      bottomNavigationBar: ButtonSection(Theme.of(context).primaryColor),
+    );
   }
 }
 
@@ -43,40 +38,46 @@ class TitleSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: <Widget>[
-        Expanded(
-          child: titleText(),
-        ),
-        Icon(Icons.star, color: Colors.red),
-        Text('Favourite'),
-      ],
+    return Container(
+      padding: const EdgeInsets.only(right: 10.0),
+      child: Row(
+        children: <Widget>[
+          Expanded(
+            child: titleText(),
+          ),
+          Icon(Icons.star, color: Colors.red),
+          Text('Favourite'),
+        ],
+      ),
     );
   }
 
-  Column titleText() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        Container(
-          padding: const EdgeInsets.only(bottom: 8.0),
-          child: Text(
-            "${company.name} Office",
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
+  Container titleText() {
+    return Container(
+      padding: const EdgeInsets.only(top: 10.0, left: 10.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Container(
+            padding: const EdgeInsets.only(bottom: 8.0),
+            child: Text(
+              "${company.name} Office",
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ),
-        ),
-        Text(
-          company.location,
-          style: TextStyle(color: Colors.grey),
-        ),
-      ],
+          Text(
+            company.location,
+            style: TextStyle(color: Colors.grey),
+          ),
+        ],
+      ),
     );
   }
 }
 
-/* ****************** Button ****************** */
+/* ****************** Bottom Appbar ****************** */
 
 class ButtonSection extends StatelessWidget {
   final Color color;
@@ -84,13 +85,12 @@ class ButtonSection extends StatelessWidget {
   ButtonSection(this.color);
 
   @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: <Widget>[
-        buildButtonCol(Icons.call, 'CALL'),
-        buildButtonCol(Icons.near_me, 'APPLY'),
-        buildButtonCol(Icons.share, 'SHARE'),
+  BottomNavigationBar build(BuildContext context) {
+    return BottomNavigationBar(
+      items: <BottomNavigationBarItem>[
+        BottomNavigationBarItem(icon: Icon(Icons.call), title: Text("CALL")),
+        BottomNavigationBarItem(icon: Icon(Icons.near_me), title: Text("APPLY")),
+        BottomNavigationBarItem(icon: Icon(Icons.share), title: Text("SHARE")),
       ],
     );
   }
@@ -115,6 +115,24 @@ class ButtonSection extends StatelessWidget {
               ),
             ))
       ],
+    );
+  }
+}
+
+/* ****************** Text ****************** */
+class TextSection extends StatelessWidget {
+  final Company company;
+
+  TextSection(this.company);
+
+  @override
+  Container build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(18.0),
+      child: Text(
+        company.description,
+        softWrap: true,
+      ),
     );
   }
 }
