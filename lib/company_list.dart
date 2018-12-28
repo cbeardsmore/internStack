@@ -31,6 +31,7 @@ class CompanyList extends StatelessWidget {
         location: snapshot['location'],
         image: snapshot['image'],
         logo: snapshot['logo'],
+        applyLink: snapshot['apply_link'],
         description: snapshot['description']);
   }
 
