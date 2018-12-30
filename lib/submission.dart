@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'gradient_app_bar.dart';
 
 class SubmissionPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('internStack - Submit')),
+      appBar: AppBar(flexibleSpace: new GradientAppBar('Submit')),
       body: SubmitForm(),
     );
   }
@@ -79,7 +80,7 @@ class InputTextFields extends StatelessWidget {
             child: TextFormField(
               decoration: InputDecoration(
                   hintText: 'Your Name',
-                  icon: Icon(Icons.person, color: Colors.deepOrange)),
+                  icon: Icon(Icons.person, color: Colors.blue)),
               controller: _controllers._nameTextController,
               validator: (value) {
                 if (value.length < 5) {
@@ -97,7 +98,7 @@ class InputTextFields extends StatelessWidget {
             child: TextFormField(
               decoration: InputDecoration(
                   hintText: 'Your Email',
-                  icon: Icon(Icons.email, color: Colors.deepOrange)),
+                  icon: Icon(Icons.email, color: Colors.blue)),
               keyboardType: TextInputType.emailAddress,
               controller: _controllers._emailTextController,
               validator: (value) {
@@ -116,7 +117,7 @@ class InputTextFields extends StatelessWidget {
             child: TextFormField(
               decoration: InputDecoration(
                   hintText: 'Company Name',
-                  icon: Icon(Icons.check_circle, color: Colors.deepOrange)),
+                  icon: Icon(Icons.check_circle, color: Colors.blue)),
               controller: _controllers._companyTextController,
               validator: (value) {
                 if (value.length < 3) {
@@ -134,7 +135,7 @@ class InputTextFields extends StatelessWidget {
             child: TextFormField(
               decoration: InputDecoration(
                   hintText: 'Other Information',
-                  icon: Icon(Icons.info, color: Colors.deepOrange)),
+                  icon: Icon(Icons.info, color: Colors.blue)),
               controller: _controllers._otherTextController,
             ),
           ),
