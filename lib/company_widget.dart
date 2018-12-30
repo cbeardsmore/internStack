@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'company.dart';
+import 'gradient_app_bar.dart';
 
 class CompanyWidget extends StatelessWidget {
   final Company company;
@@ -10,7 +11,7 @@ class CompanyWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: AppBar(
-        title: Text(company.name),
+        flexibleSpace: new GradientAppBar(company.name),
       ),
       body: ListView(
         children: <Widget>[
