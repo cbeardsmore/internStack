@@ -87,6 +87,18 @@ class InputTextFields extends StatelessWidget {
             ),
           ),
         ),
+        Card(
+          color: Colors.grey[300],
+          margin: EdgeInsets.all(9),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: TextFormField(
+              decoration: InputDecoration(
+                  hintText: 'Other Information',
+                  icon: Icon(Icons.info, color: Colors.deepOrange)),
+            ),
+          ),
+        ),
         SizedBox(height: 200)
       ],
     );
