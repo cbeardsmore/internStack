@@ -5,9 +5,14 @@ jobs:
       - image: cirrusci/flutter
     steps:
       - checkout
+
       - run: 
           name: Flutter Doctor
           command: flutter doctor
+
       - run: 
           name: Flutter Build APK
           command: flutter -v build apk
+
+      - store_artifacts:
+          path: ./build/app/outputs/apk/release/app-release.apk
