@@ -4,7 +4,7 @@ class Company {
   final String image;
   final String logo;
   final String applyLink;
-  final String description;
+  final String industry;
 
-  const Company({this.name, this.location, this.image, this.logo, this.applyLink, this.description});
+  const Company({this.name, this.location, this.image, this.logo, this.applyLink, this.industry});
 }

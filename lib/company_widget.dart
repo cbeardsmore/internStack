@@ -130,7 +130,7 @@ class TextSection extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(18.0),
       child: Text(
-        company.description,
+        company.industry,
         softWrap: true,
       ),
     );
