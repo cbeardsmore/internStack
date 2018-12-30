@@ -32,7 +32,7 @@ class CompanyList extends StatelessWidget {
         image: snapshot['image'],
         logo: snapshot['logo'],
         applyLink: snapshot['apply_link'],
-        description: snapshot['description']);
+        industry: snapshot['industry']);
   }
 
   Card _buildListItem(BuildContext context, Company company) {
