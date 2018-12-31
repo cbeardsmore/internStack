@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'company_list.dart';
 import 'about.dart';
 import 'submission.dart';
+import 'gradient_app_bar.dart';
 
 class ListingPage extends StatelessWidget {
   ListingPage({Key key, this.title}) : super(key: key);
@@ -18,7 +19,7 @@ class ListingPage extends StatelessWidget {
   }
 
   AppBar _buildAppBar(BuildContext context) {
-    return AppBar(title: Text(title), actions: <Widget>[
+    return AppBar(flexibleSpace: GradientAppBar(title), actions: <Widget>[
       Container(
         child: IconButton(
           icon: Icon(Icons.person_outline, color: Colors.white),
