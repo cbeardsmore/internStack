@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'company.dart';
 
 class CompanyWidget extends StatelessWidget {
@@ -12,19 +13,21 @@ class CompanyWidget extends StatelessWidget {
       appBar: AppBar(
         title: Text(company.name),
       ),
-      body: ListView(
-        children: <Widget>[
-          Image.network(
-            company.image,
-            width: 600.0,
-            height: 240.0,
-            fit: BoxFit.cover,
-          ),
-          TitleSection(company),
-          TextSection(company),
-        ],
-      ),
-      bottomNavigationBar: ButtonSection(Theme.of(context).primaryColor),
+      body: new Stack(children: <Widget>[
+        ListView(
+          children: <Widget>[
+            Image.network(
+              company.image,
+              width: 600.0,
+              height: 240.0,
+              fit: BoxFit.cover,
+            ),
+            TitleSection(company),
+            TextSection(company),
+          ],
+        ),
+        ButtonSection(company.applyLink)
+      ]),
     );
   }
 }
@@ -80,41 +83,63 @@ class TitleSection extends StatelessWidget {
 /* ****************** Bottom Appbar ****************** */
 
 class ButtonSection extends StatelessWidget {
-  final Color color;
+  final String url;
 
-  ButtonSection(this.color);
+  ButtonSection(this.url);
 
   @override
-  BottomNavigationBar build(BuildContext context) {
-    return BottomNavigationBar(
-      items: <BottomNavigationBarItem>[
-        BottomNavigationBarItem(icon: Icon(Icons.call), title: Text("CALL")),
-        BottomNavigationBarItem(icon: Icon(Icons.near_me), title: Text("APPLY")),
-        BottomNavigationBarItem(icon: Icon(Icons.share), title: Text("SHARE")),
-      ],
+  Container build(BuildContext context) {
+    return new Container(
+      alignment: AlignmentDirectional(0, 0.95),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          buildButtonCol(Icons.near_me, "APPLY", _launchURL),
+          buildButtonCol(Icons.share, "SHARE", null),
+        ],
+      ),
     );
   }
 
-  Column buildButtonCol(IconData icon, String label) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        Icon(
-          icon,
-          color: color,
-        ),
-        Container(
-            margin: const EdgeInsets.only(top: 8.0),
-            child: Text(
-              label,
-              style: TextStyle(
-                fontSize: 12.0,
-                fontWeight: FontWeight.w400,
-                color: color,
+  _launchURL() async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
+  Padding buildButtonCol(IconData icon, String label, VoidCallback callback) {
+    return Padding(
+      padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+      child: new SizedBox(
+        height: 60,
+        width: 120,
+        child: new RaisedButton(
+          highlightColor: Colors.blue,
+          onPressed: () => callback(),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Icon(
+                icon,
+                size: 25,
               ),
-            ))
-      ],
+              Padding(
+                padding: const EdgeInsets.only(top: 3.0),
+                child: new Text(
+                  label,
+                  style: TextStyle(
+                    fontSize: 14.0,
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+              )
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
