@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:share/share.dart';
 import 'company.dart';
 
 class CompanyWidget extends StatelessWidget {
@@ -95,7 +96,7 @@ class ButtonSection extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           buildButtonCol(Icons.near_me, "APPLY", _launchURL),
-          buildButtonCol(Icons.share, "SHARE", null),
+          buildButtonCol(Icons.share, "SHARE", _share),
         ],
       ),
     );
@@ -107,6 +108,10 @@ class ButtonSection extends StatelessWidget {
     } else {
       throw 'Could not launch $url';
     }
+  }
+
+  _share() async {
+    Share.share('...' + url);
   }
 
   Padding buildButtonCol(IconData icon, String label, VoidCallback callback) {
