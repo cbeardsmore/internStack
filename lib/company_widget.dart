@@ -18,37 +18,34 @@ class CompanyWidget extends StatelessWidget {
       body: new Stack(children: <Widget>[
         ListView(
           children: <Widget>[
-            Image.network(
-              company.image,
-              width: 600.0,
-              height: 240.0,
-              fit: BoxFit.cover,
-            ),
-            TitleSection(company),
-            TextSection(company),
+            _imageSection(),
+            _titleSection(),
+            _industrySection(),
           ],
         ),
         ButtonSection(company.applyLink)
       ]),
     );
   }
-}
 
-/* ****************** Title ****************** */
+  Card _imageSection() {
+    return Card(
+      child: Image.network(
+        company.image,
+        width: 600.0,
+        height: 240.0,
+        fit: BoxFit.cover,
+      ),
+    );
+  }
 
-class TitleSection extends StatelessWidget {
-  final Company company;
-
-  TitleSection(this.company);
-
-  @override
-  Widget build(BuildContext context) {
+  Container _titleSection() {
     return Container(
       padding: const EdgeInsets.only(right: 10.0),
       child: Row(
         children: <Widget>[
           Expanded(
-            child: titleText(),
+            child: _textSection(),
           ),
           Icon(Icons.star, color: Colors.red),
           Text('Favourite'),
@@ -57,7 +54,7 @@ class TitleSection extends StatelessWidget {
     );
   }
 
-  Container titleText() {
+  Container _textSection() {
     return Container(
       padding: const EdgeInsets.only(top: 10.0, left: 10.0),
       child: Column(
@@ -80,9 +77,19 @@ class TitleSection extends StatelessWidget {
       ),
     );
   }
+
+  Container _industrySection() {
+    return Container(
+      padding: const EdgeInsets.all(18.0),
+      child: Text(
+        company.industry,
+        softWrap: true,
+      ),
+    );
+  }
 }
 
-/* ****************** Bottom Appbar ****************** */
+/* *********************** Bottom Appbar ********************** */
 
 class ButtonSection extends StatelessWidget {
   final String url;
@@ -145,24 +152,6 @@ class ButtonSection extends StatelessWidget {
             ],
           ),
         ),
-      ),
-    );
-  }
-}
-
-/* ****************** Text ****************** */
-class TextSection extends StatelessWidget {
-  final Company company;
-
-  TextSection(this.company);
-
-  @override
-  Container build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(18.0),
-      child: Text(
-        company.industry,
-        softWrap: true,
       ),
     );
   }
