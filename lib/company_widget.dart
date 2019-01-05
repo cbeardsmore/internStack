@@ -3,7 +3,6 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:share/share.dart';
 import 'models/company.dart';
 import 'widgets/gradient_app_bar.dart';
-import 'package:transparent_image/transparent_image.dart';
 
 class CompanyWidget extends StatelessWidget {
   final Company company;
