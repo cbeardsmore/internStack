@@ -28,10 +28,8 @@ class EntryPage extends StatelessWidget {
                   style: TextStyle(color: Colors.white, fontSize: 30)),
               color: Colors.black54,
               onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => ListingPage(title: 'internStack')),
+                Navigator.pushReplacementNamed(
+                  context, '/listing'
                 );
               },
             ),
