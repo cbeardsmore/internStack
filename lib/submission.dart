@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'gradient_app_bar.dart';
+import 'widgets/gradient_app_bar.dart';
 
 class SubmissionPage extends StatelessWidget {
   @override
