@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:share/share.dart';
-import 'company.dart';
-import 'gradient_app_bar.dart';
+import 'models/company.dart';
+import 'widgets/gradient_app_bar.dart';
 
 class CompanyWidget extends StatelessWidget {
   final Company company;
@@ -28,13 +28,15 @@ class CompanyWidget extends StatelessWidget {
     );
   }
 
-  Card _imageSection() {
-    return Card(
-      child: Image.network(
-        company.image,
-        width: 600.0,
-        height: 240.0,
-        fit: BoxFit.cover,
+  ClipRRect _imageSection() {
+    return ClipRRect(
+      borderRadius: BorderRadius.all(Radius.circular(50)),
+      child: Card(
+        margin: EdgeInsets.all(10),
+        child: FadeInImage.assetNetwork(
+            placeholder: 'assets/loading.gif',
+            image: company.image,
+            fit: BoxFit.fitWidth),
       ),
     );
   }

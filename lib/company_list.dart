@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'company.dart';
+import 'models/company.dart';
 import 'company_widget.dart';
 
 class CompanyList extends StatelessWidget {
@@ -13,26 +13,16 @@ class CompanyList extends StatelessWidget {
     return StreamBuilder(
         stream: Firestore.instance.collection('companies').snapshots(),
         builder: (context, snapshot) {
-          if (!snapshot.hasData) return const Text('Loading...');
-
+          if (!snapshot.hasData)
+            return new Center(child: CircularProgressIndicator());
           return ListView.builder(
               itemCount: snapshot.data.documents.length,
               itemBuilder: (context, index) {
                 Company company =
-                    _documentToCompany(snapshot.data.documents[index]);
+                    Company.fromDocument(snapshot.data.documents[index]);
                 return _buildListItem(context, company);
               });
         });
-  }
-
-  Company _documentToCompany(DocumentSnapshot snapshot) {
-    return Company(
-        name: snapshot['name'],
-        location: snapshot['location'],
-        image: snapshot['image'],
-        logo: snapshot['logo'],
-        applyLink: snapshot['apply_link'],
-        industry: snapshot['industry']);
   }
 
   Card _buildListItem(BuildContext context, Company company) {
