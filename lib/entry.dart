@@ -10,13 +10,13 @@ class EntryPage extends StatelessWidget {
         new Container(
           decoration: new BoxDecoration(
             image: new DecorationImage(
-              image: new AssetImage("assets/entry_background.jpg"),
+              image: new AssetImage("assets/entry_background.png"),
               fit: BoxFit.cover,
             ),
           ),
         ),
         new Container(
-            alignment: AlignmentDirectional(0, -0.6),
+            alignment: AlignmentDirectional(0, -0.7),
             child: Image.asset("assets/logo.png", scale: 0.8,)),
         new Container(
           alignment: AlignmentDirectional(0, 0.9),
