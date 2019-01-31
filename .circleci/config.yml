@@ -2,17 +2,13 @@ version: 2
 jobs:
   build:
     docker:
-      - image: cirrusci/flutter:1.0.0
+      - image: cirrusci/flutter:1.1.0
     steps:
       - checkout
 
       - run: 
           name: Flutter Doctor
           command: flutter doctor
-
-      - run:
-          name: Flutter Accept Android Licenses
-          command: sdkmanager --licenses
 
       - run: 
           name: Flutter Build APK
