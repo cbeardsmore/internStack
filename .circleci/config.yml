@@ -12,7 +12,7 @@ jobs:
 
       - run:
           name: Flutter Accept Android Licenses
-          command: echo y | flutter doctor --android-licenses
+          command: yes y | flutter doctor --android-licenses
 
       - run: 
           name: Flutter Build APK
