@@ -13,6 +13,8 @@ class MainApp extends StatelessWidget {
       title: 'internStack',
       theme: ThemeData(
         primarySwatch: Colors.blue,
+        cardColor: Colors.grey[100],
+        
       ),
       home: EntryPage(),
       routes: {

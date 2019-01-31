@@ -43,6 +43,8 @@ class ListingPage extends StatelessWidget {
           },
           tooltip: 'Submit Role',
           child: new Icon(Icons.add, size: 50),
+          backgroundColor: Color(0xFF03DAC6),
+
         ),
       );
   }
