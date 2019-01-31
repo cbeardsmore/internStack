@@ -10,6 +10,10 @@ jobs:
           name: Flutter Doctor
           command: flutter doctor
 
+      - run:
+	  name: Flutter Accept Android Licenses
+          command: echo y | flutter doctor --android-licenses
+
       - run: 
           name: Flutter Build APK
           command: flutter -v build apk
