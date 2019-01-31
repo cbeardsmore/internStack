@@ -11,7 +11,7 @@ jobs:
           command: flutter doctor
 
       - run:
-	  name: Flutter Accept Android Licenses
+          name: Flutter Accept Android Licenses
           command: echo y | flutter doctor --android-licenses
 
       - run: 
