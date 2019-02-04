@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'listing.dart';
 
 class EntryPage extends StatelessWidget {
   @override
@@ -17,20 +16,24 @@ class EntryPage extends StatelessWidget {
         ),
         new Container(
             alignment: AlignmentDirectional(0, -0.7),
-            child: Image.asset("assets/logo.png", scale: 0.8,)),
+            child: Image.asset(
+              "assets/logo.png",
+              scale: 0.8,
+            )),
         new Container(
-          alignment: AlignmentDirectional(0, 0.9),
+          alignment: AlignmentDirectional(0, 0.7),
           child: new SizedBox(
-            height: 70,
-            width: 200,
+            height: 50,
+            width: 150,
             child: new RaisedButton(
-              child: const Text('Start',
-                  style: TextStyle(color: Colors.white, fontSize: 30)),
-              color: Colors.black54,
+              child: const Text('START',
+                  style: TextStyle(color: Colors.white, fontSize: 20)),
+              color: Color(0xFF302DAD),
+              elevation: 10.0,
+              shape: new RoundedRectangleBorder(
+                  borderRadius: new BorderRadius.circular(25.0)),
               onPressed: () {
-                Navigator.pushReplacementNamed(
-                  context, '/listing'
-                );
+                Navigator.pushReplacementNamed(context, '/listing');
               },
             ),
           ),
