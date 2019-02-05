@@ -15,12 +15,7 @@ class GradientAppBar extends StatelessWidget {
       child: new Center(
         child: new Text(
           title,
-          style: TextStyle(
-            color: Colors.white,
-            fontFamily: 'Poppins',
-            fontWeight: FontWeight.w600,
-            fontSize: 30.0,
-          ),
+          style: Theme.of(context).textTheme.title
         ),
       ),
     );
@@ -33,7 +28,7 @@ class GradientAppBar extends StatelessWidget {
         const Color(0xFF302DAD),
         const Color(0xFFC46BD6),
       ],
-      begin: const FractionalOffset(0.0, 0.0),
+      begin: const FractionalOffset(0.1, 0.0),
       end: const FractionalOffset(1.0, 0.0),
       stops: [0.0, 15.0],
       tileMode: TileMode.clamp,
