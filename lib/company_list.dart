@@ -39,7 +39,7 @@ class CompanyList extends StatelessWidget {
           color: Theme.of(context).cardColor,
           margin: EdgeInsets.all(5),
           child: Padding(
-            padding: const EdgeInsets.all(10.0),
+            padding: const EdgeInsets.fromLTRB(10, 15, 10, 15),
             child: new Row(
               children: <Widget>[
                 SizedBox(
@@ -48,46 +48,20 @@ class CompanyList extends StatelessWidget {
                   width: 50.0,
                 ),
                 new Expanded(
-                    flex: 2,
                     child: Column(
+
                       children: <Widget>[
                         Text(company.name,
-                            style: TextStyle(
-                                fontSize: 25, /*fontWeight: FontWeight.bold*/),
+                            style: Theme.of(context).textTheme.display1,
                             textAlign: TextAlign.center),
                         Text(company.location,
-                            style: TextStyle(
-                                fontSize: 18, color: Colors.grey[600]),
+                            style: Theme.of(context).textTheme.display2,
                             textAlign: TextAlign.center)
                       ],
                     ))
               ],
             ),
           )),
-    );
-  }
-
-  Card _oldBuildListItem(BuildContext context, Company company) {
-    return Card(
-      color: Colors.grey[300],
-      margin: EdgeInsets.all(9),
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: ListTile(
-          leading: new CircleAvatar(
-            backgroundImage: NetworkImage(company.logo),
-            radius: 34,
-          ),
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => CompanyWidget(company)),
-            );
-          },
-          title: Text(company.name, style: TextStyle(fontSize: 22)),
-          subtitle: Text(company.location, style: TextStyle(fontSize: 18)),
-        ),
-      ),
     );
   }
 }
