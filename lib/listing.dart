@@ -20,7 +20,7 @@ class ListingPage extends StatelessWidget {
     return AppBar(flexibleSpace: GradientAppBar(title), actions: <Widget>[
       Container(
         child: IconButton(
-          icon: Icon(Icons.person_outline, color: Colors.white),
+          icon: Icon(Icons.person_outline, color: Colors.white, size: 35,),
           onPressed: () {
             Navigator.pushNamed(
               context, '/about_us'

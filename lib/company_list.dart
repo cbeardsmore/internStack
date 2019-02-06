@@ -11,7 +11,7 @@ class CompanyList extends StatelessWidget {
 
   StreamBuilder _buildList(BuildContext context) {
     return StreamBuilder(
-        stream: Firestore.instance.collection('companies').snapshots(),
+        stream: Firestore.instance.collection('companies').orderBy('name').snapshots(),
         builder: (context, snapshot) {
           if (!snapshot.hasData)
             return Center(child: CircularProgressIndicator());
