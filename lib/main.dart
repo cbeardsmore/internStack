@@ -21,8 +21,10 @@ class MainApp extends StatelessWidget {
                 fontSize: 30.0,
                 fontWeight: FontWeight.w600,
                 color: Colors.white),
-            display1: TextStyle(fontSize: 25.0, color: Colors.black),
-            display2: TextStyle(fontSize: 18.0, color: Colors.grey[600])),
+            display1: TextStyle(
+                fontFamily: 'Roboto', fontSize: 25.0, color: Colors.black),
+            display2: TextStyle(
+                fontFamily: 'Roboto', fontSize: 16.0, color: Colors.grey[600])),
       ),
       home: EntryPage(),
       routes: {

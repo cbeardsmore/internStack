@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'models/company.dart';
 import 'company_widget.dart';
+import 'widgets/curver_corner_card.dart';
 
 class CompanyList extends StatelessWidget {
   @override
@@ -11,7 +12,10 @@ class CompanyList extends StatelessWidget {
 
   StreamBuilder _buildList(BuildContext context) {
     return StreamBuilder(
-        stream: Firestore.instance.collection('companies').orderBy('name').snapshots(),
+        stream: Firestore.instance
+            .collection('companies')
+            .orderBy('name')
+            .snapshots(),
         builder: (context, snapshot) {
           if (!snapshot.hasData)
             return Center(child: CircularProgressIndicator());
@@ -27,32 +31,16 @@ class CompanyList extends StatelessWidget {
 
   GestureDetector _oldbuildListItem(BuildContext context, Company company) {
     return GestureDetector(
-      onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => CompanyWidget(company)),
-        );
-      },
-      child: Card(
-            elevation: 6.0,
-            clipBehavior: Clip.antiAlias,
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(25.0)
-                )),
-            color: Theme.of(context).cardColor,
-            margin: EdgeInsets.all(5),
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(0, 0, 8, 0),
-              child: Row(
-                
-                children: <Widget>[
-                  _cardImage(company),
-                  Expanded(child: _cardText(context, company))
-                ],
-              ),
-            )),
-    );
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => CompanyWidget(company)),
+          );
+        },
+        child: CurverCornerCard(Row(children: <Widget>[
+          _cardImage(company),
+          Expanded(child: _cardText(context, company))
+        ])));
   }
 
   SizedBox _cardImage(Company companay) {
