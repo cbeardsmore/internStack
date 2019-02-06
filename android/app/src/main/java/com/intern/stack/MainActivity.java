@@ -1,4 +1,4 @@
-package com.example.newproject;
+package com.intern.stack;
 
 import android.os.Bundle;
 import io.flutter.app.FlutterActivity;
