@@ -43,14 +43,9 @@ class EntryPage extends StatelessWidget {
         height: buttonHeight,
         width: buttonWidth,
         child: new RaisedButton(
-          child: const Text('START',
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 20,
-                  letterSpacing: 2,
-                  fontFamily: 'Roboto')),
-          color: Color(0xFF6200EE),
-          splashColor: Color(0xFF25DDC5),
+          child: Text('START', style: Theme.of(context).textTheme.button),
+          color: Theme.of(context).primaryColor,
+          splashColor: Theme.of(context).accentColor,
           elevation: 10.0,
           highlightElevation: 20.0,
           shape: new RoundedRectangleBorder(

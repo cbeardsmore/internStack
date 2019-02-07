@@ -154,15 +154,22 @@ class SubmitButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double buttonHeight = MediaQuery.of(context).size.height * 0.065;
+    double buttonWidth = MediaQuery.of(context).size.width * 0.4;
+
     return new Container(
       alignment: AlignmentDirectional(0, 0),
-      child: new SizedBox(
-        height: 70,
-        width: 200,
+      child: SizedBox(
+        height: buttonHeight,
+        width: buttonWidth,
         child: new RaisedButton(
-          child: const Text('Submit',
-              style: TextStyle(color: Colors.white, fontSize: 30)),
-          color: Colors.black54,
+          child: Text('SUBMIT', style: Theme.of(context).textTheme.button),
+          color: Theme.of(context).primaryColor,
+          splashColor: Theme.of(context).accentColor,
+          elevation: 10.0,
+          highlightElevation: 20.0,
+          shape: new RoundedRectangleBorder(
+              borderRadius: new BorderRadius.circular(20.0)),
           onPressed: () {
             _uploadFormContents(context);
           },
@@ -175,8 +182,8 @@ class SubmitButton extends StatelessWidget {
     if (_formKey.currentState.validate()) {
       Firestore.instance.collection('submissions').add(_controllers.toJson());
       Scaffold.of(context).showSnackBar(SnackBar(
-          content: Text(
-              'Submission Received. Thanks' + _controllers._nameTextController.text)));
+          content: Text('Submission Received. Thanks' +
+              _controllers._nameTextController.text)));
     }
   }
 }
