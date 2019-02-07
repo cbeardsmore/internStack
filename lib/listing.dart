@@ -20,11 +20,13 @@ class ListingPage extends StatelessWidget {
     return AppBar(flexibleSpace: GradientAppBar(title), actions: <Widget>[
       Container(
         child: IconButton(
-          icon: Icon(Icons.person_outline, color: Colors.white),
+          icon: Icon(
+            Icons.person_outline,
+            color: Colors.white,
+            size: 35,
+          ),
           onPressed: () {
-            Navigator.pushNamed(
-              context, '/about_us'
-            );
+            Navigator.pushNamed(context, '/about_us');
           },
         ),
       ),
@@ -33,19 +35,20 @@ class ListingPage extends StatelessWidget {
 
   Container _buildFloatingButton(BuildContext context) {
     return new Container(
-        width: 60,
-        height: 60,
-        child: new FloatingActionButton(
-          onPressed: () {
-            Navigator.pushNamed(
-              context, '/submission',
-            );
-          },
-          tooltip: 'Submit Role',
-          child: new Icon(Icons.add, size: 40),
-          backgroundColor: Theme.of(context).accentColor,
-          foregroundColor: Colors.black,
-        ),
-      );
+      width: 60,
+      height: 60,
+      child: new FloatingActionButton(
+        onPressed: () {
+          Navigator.pushNamed(
+            context,
+            '/submission',
+          );
+        },
+        tooltip: 'Submit Role',
+        child: new Icon(Icons.add, size: 40),
+        backgroundColor: Theme.of(context).accentColor,
+        foregroundColor: Colors.black,
+      ),
+    );
   }
 }

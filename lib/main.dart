@@ -15,12 +15,16 @@ class MainApp extends StatelessWidget {
         primaryColor: Color(0xFF6200EE),
         accentColor: Color(0xFF25DDC5),
         cardColor: Colors.grey[100],
-        
         textTheme: TextTheme(
-          title: TextStyle(fontFamily: 'Poppins', fontSize: 30.0, fontWeight: FontWeight.w600, color: Colors.white),
-          display1: TextStyle(fontSize: 25.0, color: Colors.black),
-          display2: TextStyle(fontSize: 18.0, color: Colors.grey[600])
-        ),
+            title: TextStyle(
+                fontFamily: 'Poppins',
+                fontSize: 30.0,
+                fontWeight: FontWeight.w600,
+                color: Colors.white),
+            display1: TextStyle(
+                fontFamily: 'Roboto', fontSize: 25.0, color: Colors.black),
+            display2: TextStyle(
+                fontFamily: 'Roboto', fontSize: 16.0, color: Colors.grey[600])),
       ),
       home: EntryPage(),
       routes: {
@@ -31,4 +35,3 @@ class MainApp extends StatelessWidget {
     );
   }
 }
-
