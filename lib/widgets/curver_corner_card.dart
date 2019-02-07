@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class CurverCornerCard extends StatelessWidget {
   final Widget child;
 
-  CurverCornerCard(this.child);
+  CurverCornerCard({this.child});
 
   @override
   Widget build(BuildContext context) {

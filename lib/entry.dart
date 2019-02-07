@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'widgets/primary_raised_button_container.dart';
 
 class EntryPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-        body: new Stack(
+    return Scaffold(
+        body: Stack(
       children: <Widget>[
         _buildBackground(),
         _buildLogo(),
@@ -13,18 +14,18 @@ class EntryPage extends StatelessWidget {
     ));
   }
 
-  Container _buildBackground() {
+  Widget _buildBackground() {
     return Container(
-      decoration: new BoxDecoration(
-        image: new DecorationImage(
-          image: new AssetImage("assets/entry_background.png"),
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage("assets/entry_background.png"),
           fit: BoxFit.cover,
         ),
       ),
     );
   }
 
-  Container _buildLogo() {
+  Widget _buildLogo() {
     return Container(
         alignment: AlignmentDirectional(0, -0.7),
         child: Image.asset(
@@ -33,33 +34,12 @@ class EntryPage extends StatelessWidget {
         ));
   }
 
-  Container _buildButton(BuildContext context) {
-    double buttonHeight = MediaQuery.of(context).size.height * 0.065;
-    double buttonWidth = MediaQuery.of(context).size.width * 0.4;
-
-    return Container(
-      alignment: AlignmentDirectional(0, 0.7),
-      child: new SizedBox(
-        height: buttonHeight,
-        width: buttonWidth,
-        child: new RaisedButton(
-          child: const Text('START',
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 20,
-                  letterSpacing: 2,
-                  fontFamily: 'Roboto')),
-          color: Color(0xFF6200EE),
-          splashColor: Color(0xFF25DDC5),
-          elevation: 10.0,
-          highlightElevation: 20.0,
-          shape: new RoundedRectangleBorder(
-              borderRadius: new BorderRadius.circular(20.0)),
-          onPressed: () {
-            Navigator.pushReplacementNamed(context, '/listing');
-          },
-        ),
-      ),
+  Widget _buildButton(BuildContext context) {
+    return PrimaryRaisedButtonContainer(
+      title: 'START',
+      onPressed: () {
+        Navigator.pushReplacementNamed(context, '/listing');
+      },
     );
   }
 }

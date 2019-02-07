@@ -3,26 +3,23 @@ import 'package:flutter/material.dart';
 class GradientAppBar extends StatelessWidget {
   final String title;
 
-  GradientAppBar(this.title);
+  GradientAppBar({this.title});
 
   @override
   Widget build(BuildContext context) {
     final double statusBarHeight = MediaQuery.of(context).padding.top;
 
-    return new Container(
-      padding: new EdgeInsets.only(top: statusBarHeight),
+    return Container(
+      padding: EdgeInsets.only(top: statusBarHeight),
       decoration: gradient(),
-      child: new Center(
-        child: new Text(
-          title,
-          style: Theme.of(context).textTheme.title
-        ),
+      child: Center(
+        child: Text(title, style: Theme.of(context).textTheme.title),
       ),
     );
   }
 
   BoxDecoration gradient() {
-    return new BoxDecoration(
+    return BoxDecoration(
         gradient: LinearGradient(
       colors: [
         const Color(0xFF302DAD),
