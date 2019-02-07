@@ -11,11 +11,11 @@ class CompanyWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
+    return Scaffold(
       appBar: AppBar(
-        flexibleSpace: new GradientAppBar(company.name),
+        flexibleSpace: GradientAppBar(title: company.name),
       ),
-      body: new Stack(children: <Widget>[
+      body: Stack(children: <Widget>[
         ListView(
           children: <Widget>[
             _imageSection(),
@@ -100,7 +100,7 @@ class ButtonSection extends StatelessWidget {
 
   @override
   Container build(BuildContext context) {
-    return new Container(
+    return Container(
       alignment: AlignmentDirectional(0, 0.95),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -127,10 +127,10 @@ class ButtonSection extends StatelessWidget {
   Padding buildButtonCol(IconData icon, String label, VoidCallback callback) {
     return Padding(
       padding: const EdgeInsets.only(left: 8.0, right: 8.0),
-      child: new SizedBox(
+      child: SizedBox(
         height: 60,
         width: 120,
-        child: new RaisedButton(
+        child: RaisedButton(
           highlightColor: Colors.blue,
           onPressed: () => callback(),
           child: Column(
@@ -143,7 +143,7 @@ class ButtonSection extends StatelessWidget {
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 3.0),
-                child: new Text(
+                child: Text(
                   label,
                   style: TextStyle(
                     fontSize: 14.0,

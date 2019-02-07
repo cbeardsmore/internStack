@@ -6,7 +6,7 @@ class AboutPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(flexibleSpace: GradientAppBar("About Us")),
+      appBar: AppBar(flexibleSpace: GradientAppBar(title: "About Us")),
       body: Column(
         children: <Widget>[_buildTopCard(context), _buildBottomCard(context)],
       ),
@@ -19,7 +19,8 @@ class AboutPage extends StatelessWidget {
         SizedBox(
           height: 10,
         ),
-        CurverCornerCard(Column(
+        CurverCornerCard(
+            child: Column(
           children: <Widget>[
             SizedBox(
               child: Image.asset('assets/perth.jpg', fit: BoxFit.fitWidth),
@@ -47,7 +48,8 @@ class AboutPage extends StatelessWidget {
   }
 
   Widget _buildBottomCard(BuildContext context) {
-    return CurverCornerCard(Padding(
+    return CurverCornerCard(
+        child: Padding(
       padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -75,7 +77,7 @@ class AboutPage extends StatelessWidget {
       BuildContext context, String question, String answer) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8),
-      child: new Column(
+      child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Text(question, style: Theme.of(context).textTheme.display3),

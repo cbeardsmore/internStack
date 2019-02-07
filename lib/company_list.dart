@@ -37,7 +37,8 @@ class CompanyList extends StatelessWidget {
             MaterialPageRoute(builder: (context) => CompanyWidget(company)),
           );
         },
-        child: CurverCornerCard(Row(children: <Widget>[
+        child: CurverCornerCard(
+            child: Row(children: <Widget>[
           _cardImage(company),
           Expanded(child: _cardText(context, company))
         ])));

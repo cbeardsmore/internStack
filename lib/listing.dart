@@ -17,7 +17,7 @@ class ListingPage extends StatelessWidget {
   }
 
   AppBar _buildAppBar(BuildContext context) {
-    return AppBar(flexibleSpace: GradientAppBar(title), actions: <Widget>[
+    return AppBar(flexibleSpace: GradientAppBar(title: title), actions: <Widget>[
       Container(
         child: IconButton(
           icon: Icon(
@@ -34,10 +34,10 @@ class ListingPage extends StatelessWidget {
   }
 
   Container _buildFloatingButton(BuildContext context) {
-    return new Container(
+    return Container(
       width: 60,
       height: 60,
-      child: new FloatingActionButton(
+      child: FloatingActionButton(
         onPressed: () {
           Navigator.pushNamed(
             context,
@@ -45,7 +45,7 @@ class ListingPage extends StatelessWidget {
           );
         },
         tooltip: 'Submit Role',
-        child: new Icon(Icons.add, size: 40),
+        child: Icon(Icons.add, size: 40),
         backgroundColor: Theme.of(context).accentColor,
         foregroundColor: Colors.black,
       ),

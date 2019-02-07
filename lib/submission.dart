@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'widgets/gradient_app_bar.dart';
+import 'widgets/primary_raised_button_container.dart';
 
 class SubmissionPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(flexibleSpace: new GradientAppBar('Submit')),
+      appBar: AppBar(flexibleSpace: new GradientAppBar(title: 'Submit')),
       body: SubmitForm(),
     );
   }
@@ -154,28 +155,11 @@ class SubmitButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double buttonHeight = MediaQuery.of(context).size.height * 0.065;
-    double buttonWidth = MediaQuery.of(context).size.width * 0.4;
-
-    return new Container(
-      alignment: AlignmentDirectional(0, 0),
-      child: SizedBox(
-        height: buttonHeight,
-        width: buttonWidth,
-        child: new RaisedButton(
-          child: Text('SUBMIT', style: Theme.of(context).textTheme.button),
-          color: Theme.of(context).primaryColor,
-          splashColor: Theme.of(context).accentColor,
-          elevation: 10.0,
-          highlightElevation: 20.0,
-          shape: new RoundedRectangleBorder(
-              borderRadius: new BorderRadius.circular(20.0)),
-          onPressed: () {
-            _uploadFormContents(context);
-          },
-        ),
-      ),
-    );
+    return PrimaryRaisedButtonContainer(
+        title: 'SUBMIT',
+        onPressed: () {
+          _uploadFormContents(context);
+        });
   }
 
   void _uploadFormContents(BuildContext context) {
