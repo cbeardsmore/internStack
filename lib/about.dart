@@ -28,7 +28,7 @@ class AboutPage extends StatelessWidget {
               width: MediaQuery.of(context).size.width,
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 5),
+              padding: const EdgeInsets.symmetric(vertical: 0),
               child: Text('internStack',
                   style: Theme.of(context)
                       .textTheme
@@ -68,7 +68,7 @@ class AboutPage extends StatelessWidget {
               'Visit the submissions page from the Role listing and fill in the form. Alternatively, email us at internstack1@gmail.com'),
           _buildQuestionAndAnswer(context, 'How was this App developed?',
               'Sketch for UI design. Flutter for development with Cloud Firestore database. Unsplash for images.')
-        ],
+        ,SizedBox(height: 10,)],
       ),
     ));
   }

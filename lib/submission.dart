@@ -9,6 +9,7 @@ class SubmissionPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(flexibleSpace: new GradientAppBar(title: 'Submit')),
       body: SubmitForm(),
+      resizeToAvoidBottomPadding: false,
     );
   }
 }
@@ -49,8 +50,8 @@ class SubmitFormState extends State<SubmitForm> {
   Widget build(BuildContext context) {
     return Form(
         key: _formKey,
-        child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+        child: Stack(
+            //crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               InputTextFields(_controllers),
               SubmitButton(_formKey, _controllers)
@@ -141,7 +142,6 @@ class InputTextFields extends StatelessWidget {
             ),
           ),
         ),
-        SizedBox(height: 200)
       ],
     );
   }
@@ -156,10 +156,11 @@ class SubmitButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PrimaryRaisedButtonContainer(
-        title: 'SUBMIT',
-        onPressed: () {
-          _uploadFormContents(context);
-        });
+      title: 'SUBMIT',
+      onPressed: () {
+        _uploadFormContents(context);
+      },
+    );
   }
 
   void _uploadFormContents(BuildContext context) {
