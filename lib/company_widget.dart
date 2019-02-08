@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
-import 'package:share/share.dart';
 import 'models/company.dart';
 import 'widgets/gradient_app_bar.dart';
+import 'widgets/gradient_bottom_app_bar.dart';
 
 class CompanyWidget extends StatelessWidget {
   final Company company;
@@ -23,8 +22,9 @@ class CompanyWidget extends StatelessWidget {
             _industrySection(),
           ],
         ),
-        ButtonSection(company.applyLink)
       ]),
+      bottomNavigationBar:
+          BottomAppBar(child: GradientBottomAppBar(url: company.applyLink)),
     );
   }
 
@@ -86,74 +86,6 @@ class CompanyWidget extends StatelessWidget {
       child: Text(
         company.industry,
         softWrap: true,
-      ),
-    );
-  }
-}
-
-/* *********************** Bottom Appbar ********************** */
-
-class ButtonSection extends StatelessWidget {
-  final String url;
-
-  ButtonSection(this.url);
-
-  @override
-  Container build(BuildContext context) {
-    return Container(
-      alignment: AlignmentDirectional(0, 0.95),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          buildButtonCol(Icons.near_me, "APPLY", _launchURL),
-          buildButtonCol(Icons.share, "SHARE", _share),
-        ],
-      ),
-    );
-  }
-
-  _launchURL() async {
-    if (await canLaunch(url)) {
-      await launch(url);
-    } else {
-      throw 'Could not launch $url';
-    }
-  }
-
-  _share() async {
-    Share.share('...' + url);
-  }
-
-  Padding buildButtonCol(IconData icon, String label, VoidCallback callback) {
-    return Padding(
-      padding: const EdgeInsets.only(left: 8.0, right: 8.0),
-      child: SizedBox(
-        height: 60,
-        width: 120,
-        child: RaisedButton(
-          highlightColor: Colors.blue,
-          onPressed: () => callback(),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Icon(
-                icon,
-                size: 25,
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 3.0),
-                child: Text(
-                  label,
-                  style: TextStyle(
-                    fontSize: 14.0,
-                    fontWeight: FontWeight.w400,
-                  ),
-                ),
-              )
-            ],
-          ),
-        ),
       ),
     );
   }

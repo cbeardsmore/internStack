@@ -13,8 +13,11 @@ class MainApp extends StatelessWidget {
       title: 'internStack',
       theme: ThemeData(
         primaryColor: Color(0xFF6200EE),
+        primaryColorDark: Color(0xFF302DAD),
+        primaryColorLight: Color(0xFFC46BD6),
         accentColor: Color(0xFF25DDC5),
         cardColor: Colors.grey[100],
+        iconTheme: IconThemeData(color: Colors.white),
         textTheme: TextTheme(
             title: TextStyle(
                 fontFamily: 'Poppins',

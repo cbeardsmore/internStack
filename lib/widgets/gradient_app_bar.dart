@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'gradient_box_decoration.dart';
 
 class GradientAppBar extends StatelessWidget {
   final String title;
@@ -11,24 +12,10 @@ class GradientAppBar extends StatelessWidget {
 
     return Container(
       padding: EdgeInsets.only(top: statusBarHeight),
-      decoration: gradient(),
+      decoration: GradientBoxDecoration.createGradient(context),
       child: Center(
         child: Text(title, style: Theme.of(context).textTheme.title),
       ),
     );
-  }
-
-  BoxDecoration gradient() {
-    return BoxDecoration(
-        gradient: LinearGradient(
-      colors: [
-        const Color(0xFF302DAD),
-        const Color(0xFFC46BD6),
-      ],
-      begin: const FractionalOffset(0.1, 0.0),
-      end: const FractionalOffset(1.0, 0.0),
-      stops: [0.0, 15.0],
-      tileMode: TileMode.clamp,
-    ));
   }
 }
