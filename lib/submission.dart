@@ -7,7 +7,7 @@ class SubmissionPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(flexibleSpace: new GradientAppBar(title: 'Submit')),
+      appBar: AppBar(flexibleSpace: GradientAppBar(title: 'Submit')),
       body: SubmitForm(),
       resizeToAvoidBottomPadding: false,
     );
