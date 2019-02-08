@@ -7,6 +7,7 @@ class Company {
   final String logo;
   final String applyLink;
   final String industry;
+  final String founded;
 
   const Company(
       {this.name,
@@ -14,7 +15,8 @@ class Company {
       this.image,
       this.logo,
       this.applyLink,
-      this.industry});
+      this.industry,
+      this.founded});
 
   Company.fromDocument(DocumentSnapshot snapshot)
       : name = snapshot['name'],
@@ -22,5 +24,6 @@ class Company {
         image = snapshot['image'],
         logo = snapshot['logo'],
         applyLink = snapshot['apply_link'],
-        industry = snapshot['industry'];
+        industry = snapshot['industry'],
+        founded = snapshot['founded'];
 }

@@ -29,22 +29,26 @@ class GradientBottomAppBar extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        IconButton(
-          icon: Icon(
-            icon,
-            size: 25,
+        Material(
+          color: Colors.transparent,
+          child: IconButton(
+            highlightColor: Theme.of(context).accentColor,
+            padding: EdgeInsets.symmetric(horizontal: 25),
+            icon: Icon(
+              icon,
+              size: 30,
+            ),
+            onPressed: onPressed,
           ),
-          onPressed: onPressed,
         ),
         Padding(
           padding: const EdgeInsets.only(bottom: 5.0),
           child: Text(
             label,
             style: TextStyle(
-              fontSize: 14.0,
-              fontWeight: FontWeight.w400,
-              color: Colors.white
-            ),
+                fontSize: 14.0,
+                fontWeight: FontWeight.w500,
+                color: Colors.white),
           ),
         )
       ],
