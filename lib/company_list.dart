@@ -44,9 +44,12 @@ class CompanyList extends StatelessWidget {
         ])));
   }
 
-  SizedBox _cardImage(Company companay) {
+  SizedBox _cardImage(Company company) {
     return SizedBox(
-        child: Image.network(companay.logo, fit: BoxFit.fitHeight),
+        child: FadeInImage.assetNetwork(
+            placeholder: 'assets/company_default.jpg',
+            image: company.logo,
+            fit: BoxFit.fitHeight),
         height: 100.0,
         width: 100.0);
   }
