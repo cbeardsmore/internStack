@@ -51,7 +51,6 @@ class SubmitFormState extends State<SubmitForm> {
     return Form(
         key: _formKey,
         child: Stack(
-            //crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               InputTextFields(_controllers),
               SubmitButton(_formKey, _controllers)
