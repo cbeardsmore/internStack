@@ -58,6 +58,7 @@ android {
         release {
             signingConfig signingConfigs.release
 
+            shrinkResources true
             minifyEnabled true
             useProguard true
 
