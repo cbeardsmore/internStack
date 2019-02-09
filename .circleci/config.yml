@@ -23,6 +23,6 @@ jobs:
           command: flutter -v build apk --build-name=$CIRCLE_TAG --build-number=$CIRCLE_BUILD_NUM
 
       - store_artifacts:
-          path: ./build/app/outputs/apk/release/app-release-$CIRCLE_TAG+$CIRCLE_BUILD_NUM.apk
-          destination: ./
+          path: ./build/app/outputs/apk/release/app-release.apk
+          destination: ./internstack-$CIRCLE_TAG+$CIRCLE_BUILD_NUM.apk
 
