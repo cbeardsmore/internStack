@@ -14,6 +14,10 @@ jobs:
           name: Flutter Accept Android Licenses
           command: yes | flutter doctor --android-licenses || if [ $? -ne '141' ]; then exit $?; fi; 
 
+      - run:
+          name: Android Keystore Setup
+          command: .circleci/keystore.sh
+
       - run: 
           name: Flutter Build APK
           command: flutter -v build apk
