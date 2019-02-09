@@ -16,9 +16,9 @@ class GradientBottomAppBar extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
-          _buildIconButton(context, Icons.near_me, 'Apply', 'Open an application Url', _launchURL),
-          _buildIconButton(context, Icons.share, 'Share', 'Share the application Url', _share),
-          _buildIconButton(context, Icons.calendar_today, 'Notify', 'Notification before the closing date', _launchURL)
+          _buildIconButton(context, Icons.near_me, 'Apply', 'Open application url', _launchURL),
+          _buildIconButton(context, Icons.share, 'Share', 'Share application url', _share),
+          _buildIconButton(context, Icons.calendar_today, 'Notify', 'Notify before closing date', _launchURL)
         ],
       ),
     );
@@ -65,6 +65,6 @@ class GradientBottomAppBar extends StatelessWidget {
   }
 
   _share() async {
-    Share.share('...' + url);
+    Share.share('Found by internStack: ' + url);
   }
 }

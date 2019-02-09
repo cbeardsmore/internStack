@@ -20,7 +20,9 @@ jobs:
 
       - run: 
           name: Flutter Build APK
-          command: flutter -v build apk --build-number=$CIRCLE_BUILD_NUM
+          command: flutter -v build apk --build-number=$CIRCLE_BUILD_NUM && cat pubspec.yaml
 
       - store_artifacts:
           path: ./build/app/outputs/apk/release/app-release.apk
+          destination: ./
+
