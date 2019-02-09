@@ -22,7 +22,7 @@ class MainApp extends StatelessWidget {
             title: TextStyle(
                 fontFamily: 'Poppins',
                 fontSize: 30.0,
-                fontWeight: FontWeight.w600,
+                fontWeight: FontWeight.w500,
                 color: Colors.white),
             display1: TextStyle(fontSize: 25.0, color: Colors.black),
             display2: TextStyle(fontSize: 16.0, color: Colors.grey[600]),
