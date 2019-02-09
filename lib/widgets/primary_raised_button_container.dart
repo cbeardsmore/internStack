@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 class PrimaryRaisedButtonContainer extends StatelessWidget {
   final String title;
   final Function onPressed;
+  final AlignmentGeometry alignment;
 
-  PrimaryRaisedButtonContainer({this.title, this.onPressed});
+  PrimaryRaisedButtonContainer({this.title, this.onPressed, this.alignment});
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +13,7 @@ class PrimaryRaisedButtonContainer extends StatelessWidget {
     double buttonWidth = MediaQuery.of(context).size.width * 0.4;
 
     return Container(
-      alignment: AlignmentDirectional(0, 0.7),
+      alignment: alignment ?? AlignmentDirectional(0, 0.7),
       child: SizedBox(
         height: buttonHeight,
         width: buttonWidth,
