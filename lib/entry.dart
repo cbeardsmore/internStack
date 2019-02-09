@@ -25,15 +25,6 @@ class EntryPage extends StatelessWidget {
     );
   }
 
-  // Widget _buildLogo() {
-  //   return Container(
-  //       alignment: AlignmentDirectional(0, -0.7),
-  //       child: Image.asset(
-  //         "assets/logo.png",
-  //         scale: 0.8,
-  //       ));
-  // }
-
   Widget _buildLogo(BuildContext context) {
     return Align(
       alignment: AlignmentDirectional(0, -0.68),
@@ -42,8 +33,9 @@ class EntryPage extends StatelessWidget {
           width: MediaQuery.of(context).size.width * 0.84,
           decoration: new BoxDecoration(
               border: new Border.all(
-                  color: Theme.of(context).primaryColor, width: 5.0, style: BorderStyle.solid),
-              borderRadius: new BorderRadius.only(topLeft: new Radius.circular(50.0))),
+                  color: Theme.of(context).primaryColor, width: 5.0),
+              borderRadius:
+                  new BorderRadius.only(topLeft: new Radius.circular(50.0))),
           child: Center(
             child: Text(
               'internStack',

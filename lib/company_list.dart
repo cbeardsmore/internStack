@@ -18,7 +18,7 @@ class CompanyList extends StatelessWidget {
             .snapshots(),
         builder: (context, snapshot) {
           if (!snapshot.hasData)
-            return Center(child: CircularProgressIndicator());
+            return Center(child: Image(image: new AssetImage("assets/loading.webp")));
           return ListView.builder(
               itemCount: snapshot.data.documents.length,
               itemBuilder: (context, index) {
