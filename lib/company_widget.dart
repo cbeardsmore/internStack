@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
-import 'package:share/share.dart';
 import 'models/company.dart';
 import 'widgets/gradient_app_bar.dart';
+import 'widgets/gradient_bottom_app_bar.dart';
+import 'widgets/curver_corner_card.dart';
 
 class CompanyWidget extends StatelessWidget {
   final Company company;
@@ -15,146 +15,54 @@ class CompanyWidget extends StatelessWidget {
       appBar: AppBar(
         flexibleSpace: GradientAppBar(title: company.name),
       ),
-      body: Stack(children: <Widget>[
-        ListView(
-          children: <Widget>[
-            _imageSection(),
-            _titleSection(),
-            _industrySection(),
-          ],
-        ),
-        ButtonSection(company.applyLink)
-      ]),
-    );
-  }
-
-  ClipRRect _imageSection() {
-    return ClipRRect(
-      borderRadius: BorderRadius.all(Radius.circular(50)),
-      child: Card(
-        margin: EdgeInsets.all(10),
-        child: FadeInImage.assetNetwork(
-            placeholder: 'assets/loading.gif',
-            image: company.image,
-            fit: BoxFit.fitWidth),
-      ),
-    );
-  }
-
-  Container _titleSection() {
-    return Container(
-      padding: const EdgeInsets.only(right: 10.0),
-      child: Row(
-        children: <Widget>[
-          Expanded(
-            child: _textSection(),
-          ),
-          Icon(Icons.star, color: Colors.red),
-          Text('Favourite'),
-        ],
-      ),
-    );
-  }
-
-  Container _textSection() {
-    return Container(
-      padding: const EdgeInsets.only(top: 10.0, left: 10.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Container(
-            padding: const EdgeInsets.only(bottom: 8.0),
-            child: Text(
-              "${company.name} Office",
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-          Text(
-            company.location,
-            style: TextStyle(color: Colors.grey),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Container _industrySection() {
-    return Container(
-      padding: const EdgeInsets.all(18.0),
-      child: Text(
-        company.industry,
-        softWrap: true,
-      ),
-    );
-  }
-}
-
-/* *********************** Bottom Appbar ********************** */
-
-class ButtonSection extends StatelessWidget {
-  final String url;
-
-  ButtonSection(this.url);
-
-  @override
-  Container build(BuildContext context) {
-    return Container(
-      alignment: AlignmentDirectional(0, 0.95),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          buildButtonCol(Icons.near_me, "APPLY", _launchURL),
-          buildButtonCol(Icons.share, "SHARE", _share),
-        ],
-      ),
-    );
-  }
-
-  _launchURL() async {
-    if (await canLaunch(url)) {
-      await launch(url);
-    } else {
-      throw 'Could not launch $url';
-    }
-  }
-
-  _share() async {
-    Share.share('...' + url);
-  }
-
-  Padding buildButtonCol(IconData icon, String label, VoidCallback callback) {
-    return Padding(
-      padding: const EdgeInsets.only(left: 8.0, right: 8.0),
-      child: SizedBox(
-        height: 60,
-        width: 120,
-        child: RaisedButton(
-          highlightColor: Colors.blue,
-          onPressed: () => callback(),
+      body: CurverCornerCard(
+          margin: EdgeInsets.all(15),
           child: Column(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Icon(
-                icon,
-                size: 25,
+              SizedBox(
+                child: FadeInImage.assetNetwork(
+                    placeholder: 'assets/company_default.jpg',
+                    image: company.image,
+                    fit: BoxFit.cover),
+                height: MediaQuery.of(context).size.height * 0.30,
+                width: MediaQuery.of(context).size.width,
               ),
-              Padding(
-                padding: const EdgeInsets.only(top: 3.0),
-                child: Text(
-                  label,
-                  style: TextStyle(
-                    fontSize: 14.0,
-                    fontWeight: FontWeight.w400,
-                  ),
-                ),
-              )
+              SizedBox(height: 20),
+              _buildCompanyInfoRow(
+                  context, Icons.add_location, company.location, 'LOCATION'),
+              Divider(),
+              _buildCompanyInfoRow(
+                  context, Icons.work, company.industry, 'INDUSTRY'),
+              Divider(),
+              _buildCompanyInfoRow(
+                  context, Icons.flight_takeoff, company.founded, 'FOUNDED'),
+              Divider(),
+              _buildCompanyInfoRow(context, Icons.calendar_today, 'Unknown',
+                  'CLOSING DATE', 'ADD'),
+              Divider(),
             ],
-          ),
+          )),
+      bottomNavigationBar:
+          BottomAppBar(child: GradientBottomAppBar(url: company.applyLink)),
+    );
+  }
+
+  Widget _buildCompanyInfoRow(
+      BuildContext context, IconData icon, String title, String subtitle,
+      [String buttonText]) {
+    return Row(children: <Widget>[
+      Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 14),
+        child: Icon(
+          icon,
+          color: Theme.of(context).accentColor,
+          size: 60,
         ),
       ),
-    );
+      Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[Text(subtitle), Text(title)],
+      )
+    ]);
   }
 }
