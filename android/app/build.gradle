@@ -59,7 +59,9 @@ android {
             signingConfig signingConfigs.release
 
             minifyEnabled true
-            useProguard true
+            // https://github.com/flutter/flutter/issues/11099
+            // ProGuard disabled due to breaking changes in Flutter updates
+            useProguard false
 
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
