@@ -16,22 +16,23 @@ class GradientBottomAppBar extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
-          _buildIconButton(context, Icons.near_me, 'Apply', _launchURL),
-          _buildIconButton(context, Icons.share, 'Share', _share),
-          _buildIconButton(context, Icons.calendar_today, 'Notify', _launchURL)
+          _buildIconButton(context, Icons.near_me, 'Apply', 'Open application url', _launchURL),
+          _buildIconButton(context, Icons.share, 'Share', 'Share application url', _share),
+          _buildIconButton(context, Icons.calendar_today, 'Notify', 'Notify before closing date', _launchURL)
         ],
       ),
     );
   }
 
   Widget _buildIconButton(
-      BuildContext context, IconData icon, String label, Function onPressed) {
+      BuildContext context, IconData icon, String label, String tooltip, Function onPressed) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         Material(
           color: Colors.transparent,
           child: IconButton(
+            tooltip: tooltip,
             highlightColor: Theme.of(context).accentColor,
             padding: EdgeInsets.symmetric(horizontal: 25),
             icon: Icon(
@@ -64,6 +65,6 @@ class GradientBottomAppBar extends StatelessWidget {
   }
 
   _share() async {
-    Share.share('...' + url);
+    Share.share('Found by internStack: ' + url);
   }
 }
