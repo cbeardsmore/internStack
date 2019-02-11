@@ -8,7 +8,7 @@ class EntryPage extends StatelessWidget {
         body: Stack(
       children: <Widget>[
         _buildBackground(),
-        _buildLogo(),
+        _buildLogo(context),
         _buildButton(context),
       ],
     ));
@@ -25,13 +25,27 @@ class EntryPage extends StatelessWidget {
     );
   }
 
-  Widget _buildLogo() {
-    return Container(
-        alignment: AlignmentDirectional(0, -0.7),
-        child: Image.asset(
-          "assets/logo.png",
-          scale: 0.8,
-        ));
+  Widget _buildLogo(BuildContext context) {
+    return Align(
+      alignment: AlignmentDirectional(0, -0.68),
+      child: Container(
+          height: MediaQuery.of(context).size.height * 0.13,
+          width: MediaQuery.of(context).size.width * 0.84,
+          decoration: new BoxDecoration(
+              border: new Border.all(
+                  color: Theme.of(context).primaryColor, width: 5.0),
+              borderRadius:
+                  new BorderRadius.only(topLeft: new Radius.circular(50.0))),
+          child: Center(
+            child: Text(
+              'internStack',
+              style: Theme.of(context).textTheme.title.copyWith(
+                  color: Theme.of(context).primaryColor,
+                  fontSize: 50,
+                  fontWeight: FontWeight.w500),
+            ),
+          )),
+    );
   }
 
   Widget _buildButton(BuildContext context) {

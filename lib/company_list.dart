@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'models/company.dart';
 import 'company_widget.dart';
 import 'widgets/curver_corner_card.dart';
@@ -46,9 +47,10 @@ class CompanyList extends StatelessWidget {
 
   SizedBox _cardImage(Company company) {
     return SizedBox(
-        child: FadeInImage.assetNetwork(
-            placeholder: 'assets/company_default.jpg',
-            image: company.logo,
+        child: CachedNetworkImage(
+            imageUrl: company.logo,
+            errorWidget:
+                Image.asset('assets/company_default.jpg', fit: BoxFit.cover),
             fit: BoxFit.fitHeight),
         height: 100.0,
         width: 100.0);

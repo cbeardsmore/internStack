@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'models/company.dart';
 import 'widgets/gradient_app_bar.dart';
 import 'widgets/gradient_bottom_app_bar.dart';
@@ -15,33 +16,38 @@ class CompanyWidget extends StatelessWidget {
       appBar: AppBar(
         flexibleSpace: GradientAppBar(title: company.name),
       ),
-      body: CurverCornerCard(
-          margin: EdgeInsets.all(15),
-          child: Column(
-            children: <Widget>[
-              SizedBox(
-                child: FadeInImage.assetNetwork(
-                    placeholder: 'assets/company_default.jpg',
-                    image: company.image,
-                    fit: BoxFit.cover),
-                height: MediaQuery.of(context).size.height * 0.30,
-                width: MediaQuery.of(context).size.width,
-              ),
-              SizedBox(height: 20),
-              _buildCompanyInfoRow(
-                  context, Icons.add_location, company.location, 'LOCATION'),
-              Divider(),
-              _buildCompanyInfoRow(
-                  context, Icons.work, company.industry, 'INDUSTRY'),
-              Divider(),
-              _buildCompanyInfoRow(
-                  context, Icons.flight_takeoff, company.founded, 'FOUNDED'),
-              Divider(),
-              _buildCompanyInfoRow(context, Icons.calendar_today, 'Unknown',
-                  'CLOSING DATE', 'ADD'),
-              Divider(),
-            ],
-          )),
+      body: SingleChildScrollView(
+        child: CurverCornerCard(
+            margin: EdgeInsets.all(15),
+            child: Column(
+              children: <Widget>[
+                SizedBox(
+                  child: CachedNetworkImage(
+                      imageUrl: company.image,
+                      placeholder: Image.asset('assets/company_default.jpg',
+                          fit: BoxFit.fitWidth),
+                      errorWidget: Image.asset('assets/company_default.jpg',
+                          fit: BoxFit.fitWidth),
+                      fit: BoxFit.cover),
+                  height: MediaQuery.of(context).size.height * 0.30,
+                  width: MediaQuery.of(context).size.width,
+                ),
+                SizedBox(height: 20),
+                _buildCompanyInfoRow(
+                    context, Icons.add_location, company.location, 'LOCATION'),
+                Divider(),
+                _buildCompanyInfoRow(
+                    context, Icons.work, company.industry, 'INDUSTRY'),
+                Divider(),
+                _buildCompanyInfoRow(
+                    context, Icons.flight_takeoff, company.founded, 'FOUNDED'),
+                Divider(),
+                _buildCompanyInfoRow(context, Icons.calendar_today, 'Unknown',
+                    'CLOSING DATE', 'ADD'),
+                Divider(),
+              ],
+            )),
+      ),
       bottomNavigationBar:
           BottomAppBar(child: GradientBottomAppBar(url: company.applyLink)),
     );
