@@ -7,8 +7,10 @@ class AboutPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(flexibleSpace: GradientAppBar(title: "About Us")),
-      body: Column(
-        children: <Widget>[_buildTopCard(context), _buildBottomCard(context)],
+      body: SingleChildScrollView(
+        child: Column(
+          children: <Widget>[_buildTopCard(context), _buildBottomCard(context)],
+        ),
       ),
     );
   }
@@ -67,8 +69,11 @@ class AboutPage extends StatelessWidget {
           _buildQuestionAndAnswer(context, 'How do I submit a role?',
               'Visit the submissions page from the Role listing and fill in the form. Alternatively, email us at internstack1@gmail.com'),
           _buildQuestionAndAnswer(context, 'How was this App developed?',
-              'Sketch for UI design. Flutter for development with Cloud Firestore database. Unsplash for images.')
-        ,SizedBox(height: 10,)],
+              'Sketch for UI design. Flutter for development with Cloud Firestore database. Unsplash for images.'),
+          SizedBox(
+            height: 10,
+          )
+        ],
       ),
     ));
   }
