@@ -48,9 +48,11 @@ class CompanyList extends StatelessWidget {
   SizedBox _cardImage(Company company) {
     return SizedBox(
         child: CachedNetworkImage(
-            imageUrl: company.logo,
-            placeholder: Image.asset('assets/company_default.jpg'),
-            errorWidget: Image.asset('assets/company_default.jpg'),
+            imageUrl: company.logo + 'sss',
+            placeholder:
+                Image.asset('assets/company_default.jpg', fit: BoxFit.cover),
+            errorWidget:
+                Image.asset('assets/company_default.jpg', fit: BoxFit.cover),
             fit: BoxFit.fitHeight),
         height: 100.0,
         width: 100.0);
