@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'models/company.dart';
 import 'widgets/gradient_app_bar.dart';
 import 'widgets/gradient_bottom_app_bar.dart';
@@ -20,9 +21,10 @@ class CompanyWidget extends StatelessWidget {
           child: Column(
             children: <Widget>[
               SizedBox(
-                child: FadeInImage.assetNetwork(
-                    placeholder: 'assets/company_default.jpg',
-                    image: company.image,
+                child: CachedNetworkImage(
+                    imageUrl: company.image,
+                    placeholder: Image.asset('assets/company_default.jpg'),
+                    errorWidget: Image.asset('assets/company_default.jpg'),
                     fit: BoxFit.cover),
                 height: MediaQuery.of(context).size.height * 0.30,
                 width: MediaQuery.of(context).size.width,
