@@ -32,8 +32,8 @@ jobs:
             flutter -v build apk --build-name=$VERSION --build-number=$CIRCLE_BUILD_NUM
 
       - store_artifacts:
-          path: ./build/app/outputs/apk/release/app-release.apk
-          destination: .apk/internstack-${VERSION}-${CIRCLE_BUILD_NUM}.apk
+          path: ./build/app/outputs/apk/release/
+          destination: /
 
 workflows:
   version: 2
