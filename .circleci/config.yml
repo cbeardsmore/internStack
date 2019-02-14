@@ -20,7 +20,10 @@ jobs:
 
       - run: 
           name: Flutter Build APK
-          command: flutter -v build apk --build-name=$CIRCLE_TAG --build-number=$CIRCLE_BUILD_NUM
+          command: |
+            VERSION=$(. .circleci/version.sh)
+            echo $VERSION
+            flutter -v build apk --build-name=$VERSION --build-number=$CIRCLE_BUILD_NUM
 
       - store_artifacts:
           path: ./build/app/outputs/apk/release/app-release.apk
