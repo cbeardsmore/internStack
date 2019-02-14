@@ -18,4 +18,4 @@ if [[ -z "$CURRENT_BRANCH" ]]; then
     CURRENT_BRANCH="master"
 fi
 
-python ~/scripts/version.py $COMMIT_TAG $BRANCH_TAG $REPO_TAG $CURRENT_BRANCH
+python .circleci/version.py $COMMIT_TAG $BRANCH_TAG $REPO_TAG $CURRENT_BRANCH
