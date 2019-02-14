@@ -21,7 +21,6 @@ jobs:
       - run: 
           name: Flutter Build APK
           command: |
-            pip install semver==2.8.1
             VERSION=$(.circleci/version.sh)
             echo $VERSION
             flutter -v build apk --build-name=$VERSION --build-number=$CIRCLE_BUILD_NUM
