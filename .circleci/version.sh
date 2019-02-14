@@ -1,20 +1,21 @@
 #!/bin/bash
 
-BUILD_NUMBER=${CIRCLE_BUILD_NUM:-'0'}
-BRANCH=${CIRCLE_BRANCH:-'master'}
+COMMIT_TAG="$(git tag -l --points-at HEAD 2>/dev/null)"
+BRANCH_TAG="$(git describe --abbrev=0 --tags 2>/dev/null)"
+REPO_TAG="$(git describe --tags $(git rev-list --tags --max-count=1 2>/dev/null) 2>/dev/null)"
+CURRENT_BRANCH="$(git rev-parse --abbrev-ref HEAD 2>/dev/null)"
 
-# If this is a tagged build, the tag is build name, build number is 0
-if [[ ! -z "$CIRCLE_TAG" ]]; then
-    echo $CIRCLE_TAG
+if [[ -z "$COMMIT_TAG" ]]; then
+    COMMIT_TAG="null"
+fi
+if [[ -z "$BRANCH_TAG" ]]; then
+    BRANCH_TAG="null"
+fi
+if [[ -z "$REPO_TAG" ]]; then
+    REPO_TAG="null"
+fi
+if [[ -z "$CURRENT_BRANCH" ]]; then
+    CURRENT_BRANCH="master"
 fi
 
-LASTEST_TAG="$(git describe --tags $(git rev-list --tags --max-count=1))"
-echo $LASTEST_TAG
-
-# if branch master and not pr -> return blah-beta-buildnumber
-# else return blah-pr-prnumber-buildnumber
-if [[ ! -z "$CIRCLE_BRANCH" ]] && [[ ! -z "$CIRCLE_PR_NUMBER" ]]; then
-    echo $LASTEST_TAG-beta
-else
-    echo $LASTEST_TAG-pr-$CIRCLE_PR_NUMBER
-fi
+python ~/scripts/version.py $COMMIT_TAG $BRANCH_TAG $REPO_TAG $CURRENT_BRANCH
