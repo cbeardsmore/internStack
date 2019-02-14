@@ -22,7 +22,8 @@ jobs:
           name: Flutter Build APK
           command: |
             VERSION=$(.circleci/version.sh)
-            echo $VERSION
+            echo Build Name: $VERSION
+            echo Build Number: $CIRCLE_BUILD_NUM
             flutter -v build apk --build-name=$VERSION --build-number=$CIRCLE_BUILD_NUM
 
       - store_artifacts:
