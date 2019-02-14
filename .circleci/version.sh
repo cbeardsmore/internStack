@@ -18,4 +18,5 @@ if [[ -z "$CURRENT_BRANCH" ]]; then
     CURRENT_BRANCH="master"
 fi
 
+pip install semver==2.8.1
 python .circleci/version.py $COMMIT_TAG $BRANCH_TAG $REPO_TAG $CURRENT_BRANCH
