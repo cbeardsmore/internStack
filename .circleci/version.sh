@@ -8,7 +8,7 @@ if [[ ! -z "$CIRCLE_TAG" ]]; then
     echo $CIRCLE_TAG
 fi
 
-LASTEST_TAG="$(git rev-list --tags --max-count=1)"
+LASTEST_TAG="$(git describe --tags $(git rev-list --tags --max-count=1))"
 echo $LASTEST_TAG
 
 # if branch master and not pr -> return blah-beta-buildnumber
