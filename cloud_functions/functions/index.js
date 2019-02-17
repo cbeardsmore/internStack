@@ -43,4 +43,32 @@ exports.submissionEmail = functions.firestore.document('/submissions/{documentId
 	return data;
 });
 
+exports.closingDateEmail = functions.firestore.document('/closing_dates/{documentId}').onCreate((snapshot, context) => {
+	const data = snapshot.data();
+	console.log('New Closing Date:', data);
 
+	const dataAsText = 
+		"Company: " + data.company + "\n" +
+		"Closing Date: " + data.closing_date + "\n";
+
+	const mailOptions = {
+		from: '"internStack Cloud Functions" <internstack@gmail.com>',
+		subject: 'New internStack Closing Date -> ' + data.company,
+		text: dataAsText
+	};
+
+	let mailOptionsConnor = Object.assign({}, mailOptions);
+	mailOptionsConnor.to = functions.config().gmail.connor;
+	let mailOptionsSammi = Object.assign({}, mailOptions);
+	mailOptionsSammi.to = functions.config().gmail.sammi;
+
+	mailTransport.sendMail(mailOptionsConnor)
+		.then(() => console.log(`New closing date email sent to Connor`))
+		.catch((error) => console.error('Error sending new submission email:', error));
+
+	mailTransport.sendMail(mailOptionsSammi)
+		.then(() => console.log(`New submission email sent to Sammi`))
+		.catch((error) => console.error('Error sending new submission email:', error));
+
+	return data;
+});
