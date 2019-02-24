@@ -68,6 +68,10 @@ class AboutPage extends StatelessWidget {
               'Any Australian based internship focusing on Computer Science, Software Engineering or Cyber Security'),
           _buildQuestionAndAnswer(context, 'How do I submit a role?',
               'Visit the submissions page from the Role listing and fill in the form. Alternatively, email us at internstack1@gmail.com'),
+          _buildQuestionAndAnswer(
+              context,
+              'Can we have our Listing/Image removed?',
+              'Sure! We\'re only here to connect Students to internships, but send us an email and we can remove it instantly'),
           _buildQuestionAndAnswer(context, 'How was this App developed?',
               'Sketch for UI design. Flutter for development with Cloud Firestore database. Unsplash for images.'),
           SizedBox(
