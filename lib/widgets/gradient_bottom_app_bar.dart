@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
-import 'package:share/share.dart';
 import 'gradient_box_decoration.dart';
+import '../services/utils.dart';
 
 class GradientBottomAppBar extends StatelessWidget {
   final String url;
@@ -16,16 +15,19 @@ class GradientBottomAppBar extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
-          _buildIconButton(context, Icons.near_me, 'Apply', 'Open application url', _launchURL),
-          _buildIconButton(context, Icons.share, 'Share', 'Share application url', _share),
-          _buildIconButton(context, Icons.calendar_today, 'Notify', 'Notify before closing date', _launchURL)
+          _buildIconButton(context, Icons.near_me, 'Apply',
+              'Open application url', () => launchURL(url)),
+          _buildIconButton(context, Icons.share, 'Share',
+              'Share application url', () => shareURL(url)),
+          _buildIconButton(context, Icons.calendar_today, 'Notify',
+              'Notify before closing date', () => launchURL(url))
         ],
       ),
     );
   }
 
-  Widget _buildIconButton(
-      BuildContext context, IconData icon, String label, String tooltip, Function onPressed) {
+  Widget _buildIconButton(BuildContext context, IconData icon, String label,
+      String tooltip, Function onPressed) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
@@ -54,17 +56,5 @@ class GradientBottomAppBar extends StatelessWidget {
         )
       ],
     );
-  }
-
-  _launchURL() async {
-    if (await canLaunch(url)) {
-      await launch(url);
-    } else {
-      throw 'Could not launch $url';
-    }
-  }
-
-  _share() async {
-    Share.share('Found by internStack: ' + url);
   }
 }

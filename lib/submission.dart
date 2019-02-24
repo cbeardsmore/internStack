@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'widgets/gradient_app_bar.dart';
 import 'widgets/primary_raised_button_container.dart';
+import 'services/firestore.dart';
 
 class SubmissionPage extends StatelessWidget {
   @override
@@ -50,11 +50,10 @@ class SubmitFormState extends State<SubmitForm> {
   Widget build(BuildContext context) {
     return Form(
         key: _formKey,
-        child: Stack(
-            children: <Widget>[
-              InputTextFields(_controllers),
-              SubmitButton(_formKey, _controllers)
-            ]));
+        child: Stack(children: <Widget>[
+          InputTextFields(_controllers),
+          SubmitButton(_formKey, _controllers)
+        ]));
   }
 
   @override
@@ -164,10 +163,15 @@ class SubmitButton extends StatelessWidget {
 
   void _uploadFormContents(BuildContext context) {
     if (_formKey.currentState.validate()) {
-      Firestore.instance.collection('submissions').add(_controllers.toJson());
+      saveSubmission(_controllers.toJson());
       Scaffold.of(context).showSnackBar(SnackBar(
-          content: Text('Submission Received. Thanks' +
-              _controllers._nameTextController.text)));
+          backgroundColor: Theme.of(context).accentColor,
+          duration: Duration(seconds: 3),
+          content: Text(
+            'Submission Received. Thanks' +
+                _controllers._nameTextController.text,
+            textAlign: TextAlign.center,
+          )));
     }
   }
 }

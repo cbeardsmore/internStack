@@ -17,20 +17,22 @@ class ListingPage extends StatelessWidget {
   }
 
   AppBar _buildAppBar(BuildContext context) {
-    return AppBar(flexibleSpace: GradientAppBar(title: title), actions: <Widget>[
-      Container(
-        child: IconButton(
-          icon: Icon(
-            Icons.person_outline,
-            color: Colors.white,
-            size: 35,
+    return AppBar(
+        flexibleSpace: GradientAppBar(title: title),
+        actions: <Widget>[
+          Container(
+            child: IconButton(
+              icon: Icon(
+                Icons.person_outline,
+                color: Colors.white,
+                size: 35,
+              ),
+              onPressed: () {
+                Navigator.pushNamed(context, '/about_us');
+              },
+            ),
           ),
-          onPressed: () {
-            Navigator.pushNamed(context, '/about_us');
-          },
-        ),
-      ),
-    ]);
+        ]);
   }
 
   Container _buildFloatingButton(BuildContext context) {
