@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+
 import 'models/company.dart';
 import 'company_widget.dart';
 import 'widgets/curver_corner_card.dart';
+import 'services/firestore.dart';
 
 class CompanyList extends StatelessWidget {
   @override
@@ -13,10 +14,7 @@ class CompanyList extends StatelessWidget {
 
   StreamBuilder _buildList(BuildContext context) {
     return StreamBuilder(
-        stream: Firestore.instance
-            .collection('companies')
-            .orderBy('name')
-            .snapshots(),
+        stream: getCompanySnapshots(),
         builder: (context, snapshot) {
           if (!snapshot.hasData)
             return Center(child: CircularProgressIndicator());

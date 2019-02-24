@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'widgets/gradient_app_bar.dart';
 import 'widgets/primary_raised_button_container.dart';
+import 'services/firestore.dart';
 
 class SubmissionPage extends StatelessWidget {
   @override
@@ -163,7 +163,7 @@ class SubmitButton extends StatelessWidget {
 
   void _uploadFormContents(BuildContext context) {
     if (_formKey.currentState.validate()) {
-      Firestore.instance.collection('submissions').add(_controllers.toJson());
+      saveSubmission(_controllers.toJson());
       Scaffold.of(context).showSnackBar(SnackBar(
           backgroundColor: Theme.of(context).accentColor,
           duration: Duration(seconds: 3),
