@@ -5,6 +5,7 @@ import 'widgets/gradient_app_bar.dart';
 import 'widgets/gradient_bottom_app_bar.dart';
 import 'widgets/curver_corner_card.dart';
 import 'widgets/primary_raised_button_container.dart';
+
 import 'models/company.dart';
 import 'services/firestore.dart';
 import 'services/dates.dart';
@@ -27,17 +28,7 @@ class CompanyWidget extends StatelessWidget {
                 margin: EdgeInsets.all(15),
                 child: Column(
                   children: <Widget>[
-                    SizedBox(
-                      child: CachedNetworkImage(
-                          imageUrl: company.image,
-                          placeholder: Image.asset('assets/company_default.jpg',
-                              fit: BoxFit.fitWidth),
-                          errorWidget: Image.asset('assets/company_default.jpg',
-                              fit: BoxFit.fitWidth),
-                          fit: BoxFit.cover),
-                      height: MediaQuery.of(context).size.height * 0.30,
-                      width: MediaQuery.of(context).size.width,
-                    ),
+                    _buildImageStack(context),
                     SizedBox(height: 10),
                     _buildCompanyInfoRow(context, Icons.add_location,
                         company.location, 'LOCATION'),
@@ -58,6 +49,43 @@ class CompanyWidget extends StatelessWidget {
       ),
       bottomNavigationBar:
           BottomAppBar(child: GradientBottomAppBar(url: company.applyLink)),
+    );
+  }
+
+  Widget _buildImageStack(BuildContext context) {
+    return Stack(
+      children: <Widget>[
+        SizedBox(
+          child: CachedNetworkImage(
+              imageUrl: company.image,
+              placeholder: Image.asset('assets/company_default.jpg',
+                  fit: BoxFit.fitWidth),
+              errorWidget: Image.asset('assets/company_default.jpg',
+                  fit: BoxFit.fitWidth),
+              fit: BoxFit.cover),
+          height: MediaQuery.of(context).size.height * 0.30,
+          width: MediaQuery.of(context).size.width,
+        ),
+        _buildChip()
+      ],
+    );
+  }
+
+  Widget _buildChip() {
+    String status = getRoleStatusString(company.closingDate);
+    Map statusColor = Map.from({
+      'OPEN': Colors.lightGreenAccent[400],
+      'CLOSED': Colors.redAccent[400],
+      'CLOSING SOON': Colors.amber[900]
+    });
+
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Chip(
+        
+        label: Text(status),
+        backgroundColor: statusColor[status],
+      ),
     );
   }
 
