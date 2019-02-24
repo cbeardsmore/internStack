@@ -73,7 +73,7 @@ class CompanyWidget extends StatelessWidget {
   }
 
   Widget _buildChip() {
-    Status status = getRoleStatus(company.closingDate);
+    Status status = getCompanyStatus(company.closingDate, company.isOpen);
     String statusName = getStatusName(status);
     Color statusColor = getStatusColor(status);
 

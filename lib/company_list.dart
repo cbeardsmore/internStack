@@ -6,7 +6,6 @@ import 'models/status.dart';
 import 'company_widget.dart';
 import 'widgets/curver_corner_card.dart';
 import 'services/firestore.dart';
-import 'services/dates.dart';
 
 class CompanyList extends StatelessWidget {
   @override
@@ -31,7 +30,7 @@ class CompanyList extends StatelessWidget {
   }
 
   GestureDetector _buildListItem(BuildContext context, Company company) {
-    Status status = getRoleStatus(company.closingDate);
+    Status status = getCompanyStatus(company.closingDate, company.isOpen);
     return GestureDetector(
         onTap: () {
           Navigator.push(

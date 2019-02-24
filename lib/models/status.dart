@@ -8,6 +8,17 @@ Map statusColorMap = Map.from({
   Status.CLOSING_SOON: Colors.amber[900]
 });
 
+Status getCompanyStatus(DateTime closingDate, bool isOpen) {
+  if (isOpen)
+    return Status.OPEN;
+  else if (closingDate == null)
+    return Status.CLOSED;
+  else if (closingDate.difference(DateTime.now()).inDays < 7)
+    return Status.CLOSING_SOON;
+  else
+    return Status.OPEN;
+}
+
 String getStatusName(Status status) {
   return status.toString().split('.').last.replaceAll('_', ' ');
 }
