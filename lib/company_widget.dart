@@ -104,7 +104,7 @@ class CompanyWidget extends StatelessWidget {
       ),
       Padding(
         padding: const EdgeInsets.only(left: 80),
-        child: buttonText == null
+        child: buttonText == null || company.closingDate != null
             ? Container(width: 0, height: 0)
             : PrimaryRaisedButtonContainer(
                 width: 0.2,
