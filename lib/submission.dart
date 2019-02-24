@@ -50,11 +50,10 @@ class SubmitFormState extends State<SubmitForm> {
   Widget build(BuildContext context) {
     return Form(
         key: _formKey,
-        child: Stack(
-            children: <Widget>[
-              InputTextFields(_controllers),
-              SubmitButton(_formKey, _controllers)
-            ]));
+        child: Stack(children: <Widget>[
+          InputTextFields(_controllers),
+          SubmitButton(_formKey, _controllers)
+        ]));
   }
 
   @override
@@ -166,8 +165,13 @@ class SubmitButton extends StatelessWidget {
     if (_formKey.currentState.validate()) {
       Firestore.instance.collection('submissions').add(_controllers.toJson());
       Scaffold.of(context).showSnackBar(SnackBar(
-          content: Text('Submission Received. Thanks' +
-              _controllers._nameTextController.text)));
+          backgroundColor: Theme.of(context).accentColor,
+          duration: Duration(seconds: 3),
+          content: Text(
+            'Submission Received. Thanks' +
+                _controllers._nameTextController.text,
+            textAlign: TextAlign.center,
+          )));
     }
   }
 }
