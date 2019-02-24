@@ -8,12 +8,11 @@ String formatDate(DateTime date) {
   return DateFormat.yMMMMd("en_US").format(date);
 }
 
-String getRoleStatusString(DateTime closingDate) {
-  Status status = Status.OPEN;
+Status getRoleStatus(DateTime closingDate) {
   if (closingDate == null)
-    status = Status.CLOSED;
+    return Status.CLOSED;
   else if (closingDate.difference(DateTime.now()).inDays < 7)
-    status = Status.CLOSING_SOON;
-
-  return status.toString().split('.').last.replaceAll('_', ' ');
+    return Status.CLOSING_SOON;
+  else
+    return Status.OPEN;
 }

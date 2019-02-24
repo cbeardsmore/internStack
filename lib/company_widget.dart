@@ -7,6 +7,7 @@ import 'widgets/curver_corner_card.dart';
 import 'widgets/primary_raised_button_container.dart';
 
 import 'models/company.dart';
+import 'models/status.dart';
 import 'services/firestore.dart';
 import 'services/dates.dart';
 
@@ -72,19 +73,15 @@ class CompanyWidget extends StatelessWidget {
   }
 
   Widget _buildChip() {
-    String status = getRoleStatusString(company.closingDate);
-    Map statusColor = Map.from({
-      'OPEN': Colors.lightGreenAccent[400],
-      'CLOSED': Colors.redAccent[400],
-      'CLOSING SOON': Colors.amber[900]
-    });
+    Status status = getRoleStatus(company.closingDate);
+    String statusName = getStatusName(status);
+    Color statusColor = getStatusColor(status);
 
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Chip(
-        
-        label: Text(status),
-        backgroundColor: statusColor[status],
+        label: Text(statusName),
+        backgroundColor: statusColor,
       ),
     );
   }

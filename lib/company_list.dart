@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
 import 'models/company.dart';
+import 'models/status.dart';
 import 'company_widget.dart';
 import 'widgets/curver_corner_card.dart';
 import 'services/firestore.dart';
+import 'services/dates.dart';
 
 class CompanyList extends StatelessWidget {
   @override
@@ -23,12 +25,13 @@ class CompanyList extends StatelessWidget {
               itemBuilder: (context, index) {
                 Company company =
                     Company.fromDocument(snapshot.data.documents[index]);
-                return _oldbuildListItem(context, company);
+                return _buildListItem(context, company);
               });
         });
   }
 
-  GestureDetector _oldbuildListItem(BuildContext context, Company company) {
+  GestureDetector _buildListItem(BuildContext context, Company company) {
+    Status status = getRoleStatus(company.closingDate);
     return GestureDetector(
         onTap: () {
           Navigator.push(
@@ -37,9 +40,18 @@ class CompanyList extends StatelessWidget {
           );
         },
         child: CurverCornerCard(
-            child: Row(children: <Widget>[
-          _cardImage(company),
-          Expanded(child: _cardText(context, company))
+            child: Stack(children: <Widget>[
+          Row(children: <Widget>[
+            _cardImage(company),
+            Expanded(child: _cardText(context, company))
+          ]),
+          Container(
+            height: 10,
+              alignment: AlignmentDirectional(0.95, 0),
+              child: Chip(
+                label: Text('  '),
+                backgroundColor: getStatusColor(status),
+              ))
         ])));
   }
 
