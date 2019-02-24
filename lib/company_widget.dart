@@ -117,7 +117,10 @@ class CompanyWidget extends StatelessWidget {
   }
 
   void _selectDate(BuildContext context) async {
-    await _datePicker(context);
+    bool userCancelled = await _datePicker(context);
+    if (userCancelled)
+      return;
+
     Scaffold.of(context).showSnackBar(SnackBar(
         backgroundColor: Theme.of(context).accentColor,
         duration: Duration(seconds: 3),
@@ -127,7 +130,7 @@ class CompanyWidget extends StatelessWidget {
         )));
   }
 
-  Future<void> _datePicker(BuildContext context) async {
+  Future<bool> _datePicker(BuildContext context) async {
     DateTime staticNow = DateTime.now();
     int currentYear = DateTime.now().year;
 
@@ -139,6 +142,9 @@ class CompanyWidget extends StatelessWidget {
 
     if (picked != null && picked.day != DateTime.now().day) {
       saveClosingDate(company.name, picked);
+      return false;
     }
+
+    return true;
   }
 }
