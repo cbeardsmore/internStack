@@ -24,7 +24,7 @@ class CompanyWidget extends StatelessWidget {
       ),
       body: Builder(
         builder: (BuildContext context) {
-          return SingleChildScrollView(
+          return SingleChildScrollView(padding: EdgeInsets.only(bottom: 20),
             child: CurverCornerCard(
                 margin: EdgeInsets.all(15),
                 child: Column(
@@ -78,7 +78,7 @@ class CompanyWidget extends StatelessWidget {
     Color statusColor = getStatusColor(status);
 
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.only(left: 8, top: 4),
       child: Chip(
         label: Text(statusName),
         backgroundColor: statusColor,

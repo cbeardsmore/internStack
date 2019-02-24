@@ -46,11 +46,13 @@ class CompanyList extends StatelessWidget {
             Expanded(child: _cardText(context, company))
           ]),
           Container(
-            height: 10,
-              alignment: AlignmentDirectional(0.95, 0),
+              height: 10,
+              alignment: AlignmentDirectional(1.05, 0),
               child: Chip(
                 label: Text('  '),
                 backgroundColor: getStatusColor(status),
+                shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(bottomLeft: Radius.circular(6.0))),
               ))
         ])));
   }
