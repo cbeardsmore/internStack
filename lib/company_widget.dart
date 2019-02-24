@@ -7,6 +7,7 @@ import 'widgets/curver_corner_card.dart';
 import 'widgets/primary_raised_button_container.dart';
 import 'models/company.dart';
 import 'services/firestore.dart';
+import 'services/dates.dart';
 
 class CompanyWidget extends StatelessWidget {
   final Company company;
@@ -48,7 +49,7 @@ class CompanyWidget extends StatelessWidget {
                         company.founded, 'FOUNDED'),
                     Divider(),
                     _buildCompanyInfoRow(context, Icons.calendar_today,
-                        'Unknown', 'CLOSING DATE', 'ADD'),
+                        formatDate(company.closingDate), 'CLOSING DATE', 'ADD'),
                     Divider(),
                   ],
                 )),

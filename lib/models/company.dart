@@ -8,7 +8,7 @@ class Company {
   final String applyLink;
   final String industry;
   final String founded;
-  final String closingDate;
+  final DateTime closingDate;
 
   const Company(
       {this.name,
@@ -28,5 +28,5 @@ class Company {
         applyLink = snapshot['apply_link'],
         industry = snapshot['industry'],
         founded = snapshot['founded'],
-        closingDate = 'Unknown';
+        closingDate = snapshot['closing_date'];
 }
