@@ -9,6 +9,7 @@ class Company {
   final String industry;
   final String founded;
   final DateTime closingDate;
+  final bool isOpen;
 
   const Company(
       {this.name,
@@ -18,7 +19,8 @@ class Company {
       this.applyLink,
       this.industry,
       this.founded,
-      this.closingDate});
+      this.closingDate,
+      this.isOpen});
 
   Company.fromDocument(DocumentSnapshot snapshot)
       : name = snapshot['name'],
@@ -28,5 +30,6 @@ class Company {
         applyLink = snapshot['apply_link'],
         industry = snapshot['industry'],
         founded = snapshot['founded'],
-        closingDate = snapshot['closing_date'];
+        closingDate = snapshot['closing_date'],
+        isOpen = snapshot['open'] ?? false;
 }

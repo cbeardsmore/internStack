@@ -73,7 +73,7 @@ class CompanyWidget extends StatelessWidget {
   }
 
   Widget _buildChip() {
-    Status status = getRoleStatus(company.closingDate);
+    Status status = getCompanyStatus(company.closingDate, company.isOpen);
     String statusName = getStatusName(status);
     Color statusColor = getStatusColor(status);
 
@@ -104,7 +104,7 @@ class CompanyWidget extends StatelessWidget {
       ),
       Padding(
         padding: const EdgeInsets.only(left: 80),
-        child: buttonText == null
+        child: buttonText == null || company.closingDate != null
             ? Container(width: 0, height: 0)
             : PrimaryRaisedButtonContainer(
                 width: 0.2,
