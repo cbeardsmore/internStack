@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'gradient_box_decoration.dart';
+
 import '../services/utils.dart';
 
 class GradientBottomAppBar extends StatelessWidget {
@@ -20,7 +21,7 @@ class GradientBottomAppBar extends StatelessWidget {
           _buildIconButton(context, Icons.share, 'Share',
               'Share application url', () => shareURL(url)),
           _buildIconButton(context, Icons.calendar_today, 'Notify',
-              'Notify before closing date', () => launchURL(url))
+              'Notify before closing date', () => arrangeNotification(context))
         ],
       ),
     );

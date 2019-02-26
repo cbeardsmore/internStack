@@ -5,12 +5,14 @@ import 'models/company.dart';
 import 'models/status.dart';
 import 'company_widget.dart';
 import 'widgets/curver_corner_card.dart';
+import 'services/notifications.dart';
 import 'services/firestore.dart';
 import 'services/dates.dart';
 
 class CompanyList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    initialiseNotifications();
     return _buildList(context);
   }
 
