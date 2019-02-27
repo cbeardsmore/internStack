@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-
 import '../models/status.dart';
 
 String formatDate(DateTime date) {
   if (date == null) {
-    return 'N/A';
+    return 'Unknown';
   }
   return DateFormat.yMMMMd("en_US").format(date);
 }
