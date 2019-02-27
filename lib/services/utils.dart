@@ -16,11 +16,11 @@ shareURL(String url) async {
   Share.share('Found by internStack: ' + url);
 }
 
-arrangeNotification(BuildContext context) async {
+arrangeNotification(BuildContext context, String title, String body) async {
   DateTime picked = await datePicker(context);
   DateTime date = new DateTime(picked.year, picked.month, picked.day);
   TimeOfDay time = await timePicker(context);
 
   date = date.add(Duration(hours: time.hour, minutes: time.minute, seconds: 0));
-  scheduleNotification(date);
+  scheduleNotification(date, title, body);
 }

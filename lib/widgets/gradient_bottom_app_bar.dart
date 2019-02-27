@@ -2,14 +2,35 @@ import 'package:flutter/material.dart';
 import 'gradient_box_decoration.dart';
 
 import '../services/utils.dart';
+import '../models/company.dart';
+import '../models/status.dart';
 
 class GradientBottomAppBar extends StatelessWidget {
-  final String url;
+  final Company company;
 
-  GradientBottomAppBar({this.url});
+  GradientBottomAppBar({this.company});
+
+Status getCompanyStatus(DateTime closingDate, bool isOpen) {
+  if (isOpen)
+    return Status.OPEN;
+  else if (closingDate == null)
+    return Status.CLOSED;
+  else if (closingDate.difference(DateTime.now()).inDays < 7)
+    return Status.CLOSING_SOON;
+  else
+    return Status.OPEN;
+}
+
+String getStatusName(Status status) {
+  return status.toString().split('.').last.replaceAll('_', ' ');
+}
+
+
 
   @override
   Widget build(BuildContext context) {
+    String status = getStatusName(getCompanyStatus(company.closingDate, company.isOpen));
+
     return Container(
       height: 70,
       decoration: GradientBoxDecoration.createGradient(context),
@@ -17,11 +38,15 @@ class GradientBottomAppBar extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
           _buildIconButton(context, Icons.near_me, 'Apply',
-              'Open application url', () => launchURL(url)),
+              'Open application url', () => launchURL(company.applyLink)),
           _buildIconButton(context, Icons.share, 'Share',
-              'Share application url', () => shareURL(url)),
-          _buildIconButton(context, Icons.calendar_today, 'Notify',
-              'Notify before closing date', () => arrangeNotification(context))
+              'Share application url', () => shareURL(company.applyLink)),
+          _buildIconButton(
+              context,
+              Icons.calendar_today,
+              'Notify',
+              'Notify before closing date',
+              () => arrangeNotification(context, company.name, 'Applications are ' + status))
         ],
       ),
     );

@@ -49,7 +49,7 @@ class CompanyWidget extends StatelessWidget {
         },
       ),
       bottomNavigationBar:
-          BottomAppBar(child: GradientBottomAppBar(url: company.applyLink)),
+          BottomAppBar(child: GradientBottomAppBar(company:company)),
     );
   }
 

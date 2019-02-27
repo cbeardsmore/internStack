@@ -14,8 +14,7 @@ void initialiseNotifications() {
       onSelectNotification: null);
 }
 
-void scheduleNotification(DateTime date) async {
-  var scheduledNotificationDateTime = date;
+void scheduleNotification(DateTime date, String title, String body) async {
   var androidPlatformChannelSpecifics = new AndroidNotificationDetails(
       'your other channel id',
       'your other channel name',
@@ -23,6 +22,6 @@ void scheduleNotification(DateTime date) async {
   var iOSPlatformChannelSpecifics = new IOSNotificationDetails();
   NotificationDetails platformChannelSpecifics = new NotificationDetails(
       androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);
-  await notificationsPlugin.schedule(0, 'scheduled title', date.toString(),
-      scheduledNotificationDateTime, platformChannelSpecifics);
+  await notificationsPlugin.schedule(0, title, body,
+      date, platformChannelSpecifics);
 }
