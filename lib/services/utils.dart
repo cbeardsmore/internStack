@@ -17,11 +17,10 @@ shareURL(String url) async {
 }
 
 arrangeNotification(BuildContext context) async {
-  DateTime date = await datePicker(context);
+  DateTime picked = await datePicker(context);
+  DateTime date = new DateTime(picked.year, picked.month, picked.day);
   TimeOfDay time = await timePicker(context);
-  DateTime adjusted = date;
-  if (date.day != DateTime.now().day)
-    adjusted =
-        date.add(Duration(hours: time.hour, minutes: time.minute, seconds: 0));
-  scheduleNotification(adjusted);
+
+  date = date.add(Duration(hours: time.hour, minutes: time.minute, seconds: 0));
+  scheduleNotification(date);
 }
