@@ -9,7 +9,11 @@ class AboutPage extends StatelessWidget {
       appBar: AppBar(flexibleSpace: GradientAppBar(title: "About Us")),
       body: SingleChildScrollView(
         child: Column(
-          children: <Widget>[_buildTopCard(context), _buildBottomCard(context)],
+          children: <Widget>[
+            _buildTopCard(context),
+            _buildBottomCard(context),
+            SizedBox(height: 20)
+          ],
         ),
       ),
     );
@@ -74,9 +78,6 @@ class AboutPage extends StatelessWidget {
               'Sure! We\'re only here to connect Students to internships, but send us an email and we can remove it instantly'),
           _buildQuestionAndAnswer(context, 'How was this App developed?',
               'Sketch for UI design. Flutter for development with Cloud Firestore database. Unsplash for images.'),
-          SizedBox(
-            height: 10,
-          )
         ],
       ),
     ));

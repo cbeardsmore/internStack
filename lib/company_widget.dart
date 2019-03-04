@@ -49,7 +49,7 @@ class CompanyWidget extends StatelessWidget {
         },
       ),
       bottomNavigationBar:
-          BottomAppBar(child: GradientBottomAppBar(url: company.applyLink)),
+          BottomAppBar(child: GradientBottomAppBar(company:company)),
     );
   }
 
@@ -117,9 +117,11 @@ class CompanyWidget extends StatelessWidget {
   }
 
   void _selectDate(BuildContext context) async {
-    bool userCancelled = await _datePicker(context);
-    if (userCancelled)
+    DateTime date = await datePicker(context);
+    if (date == null)
       return;
+
+    saveClosingDate(company.name, date);
 
     Scaffold.of(context).showSnackBar(SnackBar(
         backgroundColor: Theme.of(context).accentColor,
@@ -130,21 +132,4 @@ class CompanyWidget extends StatelessWidget {
         )));
   }
 
-  Future<bool> _datePicker(BuildContext context) async {
-    DateTime staticNow = DateTime.now();
-    int currentYear = DateTime.now().year;
-
-    final DateTime picked = await showDatePicker(
-        context: context,
-        initialDate: staticNow,
-        firstDate: staticNow,
-        lastDate: DateTime(currentYear + 1));
-
-    if (picked != null && picked.day != DateTime.now().day) {
-      saveClosingDate(company.name, picked);
-      return false;
-    }
-
-    return true;
-  }
 }

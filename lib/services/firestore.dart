@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'dates.dart';
 
 const String COLLECTION_COMPANY = "companies";
 const String COLLECTION_CLOSING_DATE = "closing_dates";
@@ -16,7 +17,8 @@ void saveSubmission(Map json) {
 }
 
 void saveClosingDate(String companyName, DateTime closingDate) {
+  String dateString =formatDate(closingDate);
   Firestore.instance
       .collection(COLLECTION_CLOSING_DATE)
-      .add({'company': companyName, 'closing_date': closingDate});
+      .add({'company': companyName, 'closing_date': dateString});
 }
