@@ -72,75 +72,43 @@ class InputTextFields extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        Card(
-          color: Colors.grey[300],
-          margin: EdgeInsets.all(9),
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: TextFormField(
-              decoration: InputDecoration(
-                  hintText: 'Your Name',
-                  icon: Icon(Icons.person, color: Colors.blue)),
-              controller: _controllers._nameTextController,
-              validator: (value) {
-                if (value.length < 5) {
-                  return 'Please enter your Name';
-                }
-              },
-            ),
-          ),
-        ),
-        Card(
-          color: Colors.grey[300],
-          margin: EdgeInsets.all(9),
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: TextFormField(
-              decoration: InputDecoration(
-                  hintText: 'Your Email',
-                  icon: Icon(Icons.email, color: Colors.blue)),
-              keyboardType: TextInputType.emailAddress,
-              controller: _controllers._emailTextController,
-              validator: (value) {
-                if (!value.contains('@')) {
-                  return 'Please enter a valid email';
-                }
-              },
-            ),
-          ),
-        ),
-        Card(
-          color: Colors.grey[300],
-          margin: EdgeInsets.all(9),
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: TextFormField(
-              decoration: InputDecoration(
-                  hintText: 'Company Name',
-                  icon: Icon(Icons.check_circle, color: Colors.blue)),
-              controller: _controllers._companyTextController,
-              validator: (value) {
-                if (value.length < 3) {
-                  return 'Please enter the Company name';
-                }
-              },
-            ),
-          ),
-        ),
-        Card(
-          color: Colors.grey[300],
-          margin: EdgeInsets.all(9),
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: TextFormField(
-              decoration: InputDecoration(
-                  hintText: 'Other Information',
-                  icon: Icon(Icons.info, color: Colors.blue)),
-              controller: _controllers._otherTextController,
-            ),
-          ),
-        ),
+        _buildSubmissionCard(
+            Icons.person, 'Your Name', _controllers._nameTextController,
+            (name) {
+          if (name.length < 4) return 'Please enter your name';
+        }),
+        _buildSubmissionCard(
+            Icons.email, 'Your Email', _controllers._emailTextController,
+            (email) {
+          if (!email.contains('@')) {
+            return 'Please enter a valid email';
+          }
+        }),
+        _buildSubmissionCard(Icons.check_circle, 'Company Name',
+            _controllers._companyTextController, (company) {
+          if (company.length < 3) {
+            return 'Please enter the Company name';
+          }
+        }),
+        _buildSubmissionCard(Icons.info, 'Other Information',
+            _controllers._otherTextController, null),
       ],
+    );
+  }
+
+  Widget _buildSubmissionCard(IconData icon, String hintText,
+      TextEditingController controller, Function validator) {
+    return Card(
+      color: Colors.grey[300],
+      margin: EdgeInsets.all(9),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: TextFormField(
+            decoration: InputDecoration(
+                hintText: hintText, icon: Icon(icon, color: Colors.blue)),
+            controller: controller,
+            validator: validator),
+      ),
     );
   }
 }
