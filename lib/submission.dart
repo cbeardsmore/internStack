@@ -72,43 +72,77 @@ class InputTextFields extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        _buildSubmissionCard(
-            Icons.person, 'Your Name', _controllers._nameTextController,
-            (name) {
-          if (name.length < 4) return 'Please enter your name';
-        }),
-        _buildSubmissionCard(
-            Icons.email, 'Your Email', _controllers._emailTextController,
-            (email) {
-          if (!email.contains('@')) {
-            return 'Please enter a valid email';
-          }
-        }),
-        _buildSubmissionCard(Icons.check_circle, 'Company Name',
-            _controllers._companyTextController, (company) {
-          if (company.length < 3) {
-            return 'Please enter the Company name';
-          }
-        }),
-        _buildSubmissionCard(Icons.info, 'Other Information',
-            _controllers._otherTextController, null),
+        SubmissionCard(
+            icon: Icons.person,
+            hintText: 'Your Name',
+            controller: _controllers._nameTextController),
+        SubmissionCard(
+            icon: Icons.email,
+            hintText: 'Your Email',
+            controller: _controllers._emailTextController,
+            validator: (email) {
+              bool emailValid = RegExp(r"^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(email);
+              if (!emailValid) {
+                return 'Please enter a valid email';
+              }
+            }),
+        SubmissionCard(
+            icon: Icons.check_circle,
+            hintText: 'Company Name',
+            controller: _controllers._companyTextController,
+            validator: (company) {
+              if (company.length < 3) {
+                return 'Please enter the Company name';
+              }
+            }),
+        SubmissionCard(
+            icon: Icons.info,
+            hintText: 'Other Information',
+            controller: _controllers._otherTextController),
       ],
     );
   }
+}
 
-  Widget _buildSubmissionCard(IconData icon, String hintText,
-      TextEditingController controller, Function validator) {
+class SubmissionCard extends StatefulWidget {
+  final IconData icon;
+  final String hintText;
+  final TextEditingController controller;
+  final Function validator;
+
+  SubmissionCard({this.icon, this.hintText, this.controller, this.validator});
+
+  @override
+  _SubmissionCardState createState() => _SubmissionCardState();
+}
+
+class _SubmissionCardState extends State<SubmissionCard> {
+  bool _autovalidate = false;
+
+  @override
+  Widget build(BuildContext context) {
     return Card(
       color: Colors.grey[300],
-      margin: EdgeInsets.all(9),
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: TextFormField(
-            decoration: InputDecoration(
-                hintText: hintText, icon: Icon(icon, color: Colors.blue)),
-            controller: controller,
-            validator: validator),
-      ),
+      margin: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(topLeft: Radius.circular(10.0))),
+      child: TextFormField(
+          onEditingComplete: () => {setState(() => _autovalidate = true)},
+          autovalidate: _autovalidate,
+          style: TextStyle(fontSize: 16),
+          decoration: InputDecoration(
+            focusedBorder: UnderlineInputBorder(
+                borderSide: BorderSide(color: Theme.of(context).primaryColor)),
+            enabledBorder: UnderlineInputBorder(
+              borderSide: BorderSide(color: Theme.of(context).accentColor),
+            ),
+            labelText: widget.hintText ?? null,
+            prefixIcon: Icon(
+              widget.icon ?? Icons.star,
+            ),
+          ),
+          controller: widget.controller ?? null,
+          validator: widget.validator ?? null),
     );
   }
 }
@@ -124,12 +158,12 @@ class SubmitButton extends StatelessWidget {
     return PrimaryRaisedButtonContainer(
       title: 'SUBMIT',
       onPressed: () {
-        _uploadFormContents(context);
+        _showSnackbar(context);
       },
     );
   }
 
-  void _uploadFormContents(BuildContext context) {
+  void _showSnackbar(BuildContext context) {
     if (_formKey.currentState.validate()) {
       saveSubmission(_controllers.toJson());
       Scaffold.of(context).showSnackBar(SnackBar(
