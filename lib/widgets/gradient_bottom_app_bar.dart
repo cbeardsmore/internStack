@@ -10,26 +10,9 @@ class GradientBottomAppBar extends StatelessWidget {
 
   GradientBottomAppBar({this.company});
 
-Status getCompanyStatus(DateTime closingDate, bool isOpen) {
-  if (isOpen)
-    return Status.OPEN;
-  else if (closingDate == null)
-    return Status.CLOSED;
-  else if (closingDate.difference(DateTime.now()).inDays < 7)
-    return Status.CLOSING_SOON;
-  else
-    return Status.OPEN;
-}
-
-String getStatusName(Status status) {
-  return status.toString().split('.').last.replaceAll('_', ' ');
-}
-
-
-
   @override
   Widget build(BuildContext context) {
-    String status = getStatusName(getCompanyStatus(company.closingDate, company.isOpen));
+    Status status = Status(company.closingDate, company.isOpen);
 
     return Container(
       height: 70,
@@ -46,7 +29,8 @@ String getStatusName(Status status) {
               Icons.calendar_today,
               'Notify',
               'Notify before closing date',
-              () => arrangeNotification(context, company.name, 'Applications are ' + status))
+              () => arrangeNotification(context, company.name,
+                  'Applications are ' + status.getName()))
         ],
       ),
     );

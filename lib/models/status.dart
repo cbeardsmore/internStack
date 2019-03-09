@@ -1,28 +1,31 @@
 import 'package:flutter/material.dart';
+import 'status_enum.dart';
 
-enum Status { OPEN, CLOSED, CLOSING_SOON }
+class Status {
+  StatusEnum status;
 
-Map statusColorMap = Map.from({
-  Status.OPEN: Colors.lightGreenAccent[400],
-  Status.CLOSED: Colors.redAccent[400],
-  Status.CLOSING_SOON: Colors.amber[900]
-});
+  final Map colorMap = Map.from({
+    StatusEnum.OPEN: Colors.lightGreenAccent[400],
+    StatusEnum.CLOSED: Colors.redAccent[400],
+    StatusEnum.CLOSING_SOON: Colors.amber[900]
+  });
 
-Status getCompanyStatus(DateTime closingDate, bool isOpen) {
-  if (isOpen)
-    return Status.OPEN;
-  else if (closingDate == null)
-    return Status.CLOSED;
-  else if (closingDate.difference(DateTime.now()).inDays < 7)
-    return Status.CLOSING_SOON;
-  else
-    return Status.OPEN;
-}
+  Status(DateTime closingDate, bool isOpen) {
+    if (isOpen)
+      status = StatusEnum.OPEN;
+    else if (closingDate == null)
+      status = StatusEnum.CLOSED;
+    else if (closingDate.difference(DateTime.now()).inDays < 7)
+      status = StatusEnum.CLOSING_SOON;
+    else
+      status = StatusEnum.OPEN;
+  }
 
-String getStatusName(Status status) {
-  return status.toString().split('.').last.replaceAll('_', ' ');
-}
+  getName() {
+    return status.toString().split('.').last.replaceAll('_', ' ');
+  }
 
-Color getStatusColor(Status status) {
-  return statusColorMap[status];
+  getColor() {
+    return colorMap[status];
+  }
 }
