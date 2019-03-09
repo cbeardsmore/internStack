@@ -170,7 +170,7 @@ class SubmitButton extends StatelessWidget {
           backgroundColor: Theme.of(context).accentColor,
           duration: Duration(seconds: 3),
           content: Text(
-            'Submission Received. Thanks' +
+            'Submission Received. Thanks ' +
                 _controllers._nameTextController.text,
             textAlign: TextAlign.center,
           )));
