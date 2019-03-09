@@ -41,7 +41,7 @@ class CompanyWidget extends StatelessWidget {
                         company.founded, 'FOUNDED'),
                     Divider(),
                     _buildCompanyInfoRow(context, Icons.calendar_today,
-                        formatDate(company.closingDate), 'CLOSING DATE', 'ADD'),
+                        formatDate(company.closingDate) ?? 'Unknown', 'CLOSING DATE', 'ADD'),
                     Divider(),
                   ],
                 )),

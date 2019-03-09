@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'gradient_box_decoration.dart';
 
 import '../services/utils.dart';
+import '../services/notifications.dart';
 import '../models/company.dart';
 import '../models/status.dart';
 
