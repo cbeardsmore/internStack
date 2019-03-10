@@ -14,11 +14,10 @@ Australian Software Internships Listing built in Flutter. Features:
 
 ## Download
 
-<img src="https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png" width="20%" height="20%">
+[<img src="https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png" href="http://google.com" width="20%" height="20%">](https://play.google.com/store/apps/details?id=com.intern.stack)
 
 ## Build and Run
 
-- The app can be be run on both Android and iOS simulators through VisualStudio Code
 - Install [Flutter](https://flutter.dev/docs/get-started/install) and confirm installation:
 	
 	```bash
