@@ -72,75 +72,77 @@ class InputTextFields extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        Card(
-          color: Colors.grey[300],
-          margin: EdgeInsets.all(9),
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: TextFormField(
-              decoration: InputDecoration(
-                  hintText: 'Your Name',
-                  icon: Icon(Icons.person, color: Colors.blue)),
-              controller: _controllers._nameTextController,
-              validator: (value) {
-                if (value.length < 5) {
-                  return 'Please enter your Name';
-                }
-              },
-            ),
-          ),
-        ),
-        Card(
-          color: Colors.grey[300],
-          margin: EdgeInsets.all(9),
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: TextFormField(
-              decoration: InputDecoration(
-                  hintText: 'Your Email',
-                  icon: Icon(Icons.email, color: Colors.blue)),
-              keyboardType: TextInputType.emailAddress,
-              controller: _controllers._emailTextController,
-              validator: (value) {
-                if (!value.contains('@')) {
-                  return 'Please enter a valid email';
-                }
-              },
-            ),
-          ),
-        ),
-        Card(
-          color: Colors.grey[300],
-          margin: EdgeInsets.all(9),
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: TextFormField(
-              decoration: InputDecoration(
-                  hintText: 'Company Name',
-                  icon: Icon(Icons.check_circle, color: Colors.blue)),
-              controller: _controllers._companyTextController,
-              validator: (value) {
-                if (value.length < 3) {
-                  return 'Please enter the Company name';
-                }
-              },
-            ),
-          ),
-        ),
-        Card(
-          color: Colors.grey[300],
-          margin: EdgeInsets.all(9),
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: TextFormField(
-              decoration: InputDecoration(
-                  hintText: 'Other Information',
-                  icon: Icon(Icons.info, color: Colors.blue)),
-              controller: _controllers._otherTextController,
-            ),
-          ),
-        ),
+        SubmissionCard(
+            icon: Icons.person,
+            hintText: 'Your Name',
+            controller: _controllers._nameTextController),
+        SubmissionCard(
+            icon: Icons.email,
+            hintText: 'Your Email',
+            controller: _controllers._emailTextController,
+            validator: (email) {
+              bool emailValid = RegExp(r"^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(email);
+              if (!emailValid) {
+                return 'Please enter a valid email';
+              }
+            }),
+        SubmissionCard(
+            icon: Icons.check_circle,
+            hintText: 'Company Name',
+            controller: _controllers._companyTextController,
+            validator: (company) {
+              if (company.length < 3) {
+                return 'Please enter the Company name';
+              }
+            }),
+        SubmissionCard(
+            icon: Icons.info,
+            hintText: 'Other Information',
+            controller: _controllers._otherTextController),
       ],
+    );
+  }
+}
+
+class SubmissionCard extends StatefulWidget {
+  final IconData icon;
+  final String hintText;
+  final TextEditingController controller;
+  final Function validator;
+
+  SubmissionCard({this.icon, this.hintText, this.controller, this.validator});
+
+  @override
+  _SubmissionCardState createState() => _SubmissionCardState();
+}
+
+class _SubmissionCardState extends State<SubmissionCard> {
+  bool _autovalidate = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      color: Colors.grey[300],
+      margin: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(topLeft: Radius.circular(10.0))),
+      child: TextFormField(
+          onEditingComplete: () => {setState(() => _autovalidate = true)},
+          autovalidate: _autovalidate,
+          style: TextStyle(fontSize: 16),
+          decoration: InputDecoration(
+            focusedBorder: UnderlineInputBorder(
+                borderSide: BorderSide(color: Theme.of(context).primaryColor)),
+            enabledBorder: UnderlineInputBorder(
+              borderSide: BorderSide(color: Theme.of(context).accentColor),
+            ),
+            labelText: widget.hintText ?? null,
+            prefixIcon: Icon(
+              widget.icon ?? Icons.star,
+            ),
+          ),
+          controller: widget.controller ?? null,
+          validator: widget.validator ?? null),
     );
   }
 }
@@ -156,19 +158,19 @@ class SubmitButton extends StatelessWidget {
     return PrimaryRaisedButtonContainer(
       title: 'SUBMIT',
       onPressed: () {
-        _uploadFormContents(context);
+        _showSnackbar(context);
       },
     );
   }
 
-  void _uploadFormContents(BuildContext context) {
+  void _showSnackbar(BuildContext context) {
     if (_formKey.currentState.validate()) {
       saveSubmission(_controllers.toJson());
       Scaffold.of(context).showSnackBar(SnackBar(
           backgroundColor: Theme.of(context).accentColor,
           duration: Duration(seconds: 3),
           content: Text(
-            'Submission Received. Thanks' +
+            'Submission Received. Thanks ' +
                 _controllers._nameTextController.text,
             textAlign: TextAlign.center,
           )));
