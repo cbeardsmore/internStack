@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'dates.dart';
 
-final FlutterLocalNotificationsPlugin notificationsPlugin = new FlutterLocalNotificationsPlugin();
+FlutterLocalNotificationsPlugin notifyPlugin;
+Random random = new Random(DateTime.now().second);
 
 arrangeNotification(BuildContext context, String title, String body) async {
   DateTime picked = await datePicker(context);
@@ -14,24 +15,20 @@ arrangeNotification(BuildContext context, String title, String body) async {
 }
 
 void initialiseNotifications() {
-  var initializationSettingsAndroid =
-      new AndroidInitializationSettings('@mipmap/ic_launcher');
-  var initializationSettingsIOS =
-      new IOSInitializationSettings(onDidReceiveLocalNotification: null);
-  var initializationSettings = new InitializationSettings(
-      initializationSettingsAndroid, initializationSettingsIOS);
-  notificationsPlugin.initialize(initializationSettings,
-      onSelectNotification: null);
+  notifyPlugin = new FlutterLocalNotificationsPlugin();
+  var andriodInitSettings = new AndroidInitializationSettings('app_icon');
+  var iosInitSettings = new IOSInitializationSettings(onDidReceiveLocalNotification: null);
+  var initSettings = new InitializationSettings(andriodInitSettings, iosInitSettings);
+  notifyPlugin.initialize(initSettings, onSelectNotification: null);
 }
 
 void scheduleNotification(DateTime date, String title, String body) async {
-  var androidPlatformChannelSpecifics = new AndroidNotificationDetails(
-      'your other channel id',
-      'your other channel name',
-      'your other channel description');
-  var iOSPlatformChannelSpecifics = new IOSNotificationDetails();
-  NotificationDetails platformChannelSpecifics = new NotificationDetails(
-      androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);
-  await notificationsPlugin.schedule(0, title, body,
-      date, platformChannelSpecifics);
+  var andriodNotifyDetails = new AndroidNotificationDetails(
+      'Closing Application',
+      'internStack',
+      'Notification of Role closing date',
+);
+  var iosNotifyDetails = new IOSNotificationDetails();
+  NotificationDetails platformNotifyDetails = new NotificationDetails(andriodNotifyDetails, iosNotifyDetails);
+  await notifyPlugin.schedule(random.nextInt(1000), title, body, date, platformNotifyDetails);
 }
