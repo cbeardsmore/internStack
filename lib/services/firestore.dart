@@ -17,7 +17,7 @@ void saveSubmission(Map json) {
 }
 
 void saveClosingDate(String companyName, DateTime closingDate) {
-  String dateString =formatDate(closingDate);
+  String dateString =formatDate(closingDate) ?? 'Unknown';
   Firestore.instance
       .collection(COLLECTION_CLOSING_DATE)
       .add({'company': companyName, 'closing_date': dateString});

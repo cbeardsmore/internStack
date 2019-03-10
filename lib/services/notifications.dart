@@ -1,8 +1,19 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'dart:math';
+import 'dates.dart';
 
 FlutterLocalNotificationsPlugin notifyPlugin;
 Random random = new Random(DateTime.now().second);
+
+arrangeNotification(BuildContext context, String title, String body) async {
+  DateTime picked = await datePicker(context);
+  DateTime date = new DateTime(picked.year, picked.month, picked.day);
+  TimeOfDay time = await timePicker(context);
+
+  date = date.add(Duration(hours: time.hour, minutes: time.minute, seconds: 0));
+  scheduleNotification(date, title, body);
+}
 
 void initialiseNotifications() {
   notifyPlugin = new FlutterLocalNotificationsPlugin();

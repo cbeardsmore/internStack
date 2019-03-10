@@ -32,7 +32,7 @@ class CompanyList extends StatelessWidget {
   }
 
   GestureDetector _buildListItem(BuildContext context, Company company) {
-    Status status = getCompanyStatus(company.closingDate, company.isOpen);
+    Status status = Status(company.closingDate, company.isOpen);
     return GestureDetector(
         onTap: () {
           Navigator.push(
@@ -51,7 +51,7 @@ class CompanyList extends StatelessWidget {
               alignment: AlignmentDirectional(1.05, 0),
               child: Chip(
                 label: Text('  '),
-                backgroundColor: getStatusColor(status),
+                backgroundColor: status.getColor(),
                 shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.only(bottomLeft: Radius.circular(6.0))),
               ))
