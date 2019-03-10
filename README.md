@@ -12,9 +12,19 @@ Australian Software Internships Listing built in Flutter. Features:
 
 ![](screenshots/3-panel.png)
 
-####Build and Run
+## Download
 
-- Install [Flutter](https://flutter.dev/docs/get-started/install)
+<img src="https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png" width="20%" height="20%">
+
+## Build and Run
+
+- The app can be be run on both Android and iOS simulators through VisualStudio Code
+- Install [Flutter](https://flutter.dev/docs/get-started/install) and confirm installation:
+	
+	```bash
+	flutter doctor
+	```
+
 - Build the APK:
 
 	```bash
@@ -26,9 +36,5 @@ Australian Software Internships Listing built in Flutter. Features:
 	```
 	flutter run
 	```
-	
-- The app can be be run on both Andriod and iOS simulators through VisualStudio Code
 
-#### Download
 
-![](https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png)
