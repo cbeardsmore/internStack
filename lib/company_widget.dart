@@ -10,6 +10,8 @@ import 'models/company.dart';
 import 'models/status.dart';
 import 'services/firestore.dart';
 import 'services/dates.dart';
+import 'services/utils.dart';
+import 'services/notifications.dart';
 
 class CompanyWidget extends StatelessWidget {
   final Company company;
@@ -18,13 +20,16 @@ class CompanyWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Status status = Status(company.closingDate, company.isOpen);
+
     return Scaffold(
       appBar: AppBar(
         flexibleSpace: GradientAppBar(title: company.name),
       ),
       body: Builder(
         builder: (BuildContext context) {
-          return SingleChildScrollView(padding: EdgeInsets.only(bottom: 20),
+          return SingleChildScrollView(
+            padding: EdgeInsets.only(bottom: 20),
             child: CurverCornerCard(
                 margin: EdgeInsets.all(15),
                 child: Column(
@@ -40,16 +45,24 @@ class CompanyWidget extends StatelessWidget {
                     _buildCompanyInfoRow(context, Icons.flight_takeoff,
                         company.founded, 'FOUNDED'),
                     Divider(),
-                    _buildCompanyInfoRow(context, Icons.calendar_today,
-                        formatDate(company.closingDate) ?? 'Unknown', 'CLOSING DATE', 'ADD'),
+                    _buildCompanyInfoRow(
+                        context,
+                        Icons.calendar_today,
+                        formatDate(company.closingDate) ?? 'Unknown',
+                        'CLOSING DATE',
+                        'ADD'),
                     Divider(),
                   ],
                 )),
           );
         },
       ),
-      bottomNavigationBar:
-          BottomAppBar(child: GradientBottomAppBar(company:company)),
+      bottomNavigationBar: BottomAppBar(
+          child: GradientBottomAppBar(
+              leftButtonPressed: () => launchURL(company.applyLink),
+              centerButtonPressed: () => shareURL(company.applyLink),
+              rightButtonPressed: () => arrangeNotification(context,
+                  company.name, 'Applications are ' + status.getName()))),
     );
   }
 
@@ -116,8 +129,7 @@ class CompanyWidget extends StatelessWidget {
 
   void _selectDate(BuildContext context) async {
     DateTime date = await datePicker(context);
-    if (date == null)
-      return;
+    if (date == null) return;
 
     saveClosingDate(company.name, date);
 
@@ -129,5 +141,4 @@ class CompanyWidget extends StatelessWidget {
           textAlign: TextAlign.center,
         )));
   }
-
 }
