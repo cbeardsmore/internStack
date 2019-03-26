@@ -13,7 +13,7 @@ class Status {
   Status(DateTime closingDate, bool isOpen) {
     if (isOpen)
       status = StatusEnum.OPEN;
-    else if (closingDate == null)
+    else if ((closingDate == null) || (closingDate.isBefore(DateTime.now())))
       status = StatusEnum.CLOSED;
     else if (closingDate.difference(DateTime.now()).inDays < 7)
       status = StatusEnum.CLOSING_SOON;
