@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'gradient_box_decoration.dart';
+import 'package:internStack/widgets/gradient_box_decoration.dart';
 
 class GradientAppBar extends StatelessWidget {
   final String title;

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'widgets/gradient_app_bar.dart';
-import 'widgets/curver_corner_card.dart';
+import 'package:internStack/widgets/gradient_app_bar.dart';
+import 'package:internStack/widgets/curver_corner_card.dart';
 
 class AboutPage extends StatelessWidget {
   @override

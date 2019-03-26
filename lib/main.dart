@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'entry.dart';
-import 'listing.dart';
-import 'submission.dart';
-import 'about.dart';
+import 'package:internStack/entry.dart';
+import 'package:internStack/listing.dart';
+import 'package:internStack/submission.dart';
+import 'package:internStack/about.dart';
 
 void main() => runApp(MainApp());
 

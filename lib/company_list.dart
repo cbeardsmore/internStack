@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
-import 'models/company.dart';
-import 'models/status.dart';
-import 'company_widget.dart';
-import 'widgets/curver_corner_card.dart';
-import 'services/notifications.dart';
-import 'services/firestore.dart';
+import 'package:internStack/models/company.dart';
+import 'package:internStack/models/status.dart';
+import 'package:internStack/company_widget.dart';
+import 'package:internStack/widgets/curver_corner_card.dart';
+import 'package:internStack/services/notifications.dart';
+import 'package:internStack/services/firestore.dart';
 
 class CompanyList extends StatelessWidget {
   @override

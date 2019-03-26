@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'widgets/gradient_app_bar.dart';
-import 'widgets/primary_raised_button_container.dart';
-import 'services/firestore.dart';
+import 'package:internStack/widgets/gradient_app_bar.dart';
+import 'package:internStack/widgets/primary_raised_button_container.dart';
+import 'package:internStack/services/firestore.dart';
 
 class SubmissionPage extends StatelessWidget {
   @override
