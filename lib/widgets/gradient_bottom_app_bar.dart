@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'gradient_box_decoration.dart';
-import 'gradient_bottom_app_bar_button.dart';
+import 'package:internStack/widgets/gradient_box_decoration.dart';
+import 'package:internStack/widgets/gradient_bottom_app_bar_button.dart';
 
 class GradientBottomAppBar extends StatelessWidget {
   final Function leftButtonPressed;

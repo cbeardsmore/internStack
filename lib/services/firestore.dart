@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'dates.dart';
+import 'package:internStack/services/dates.dart';
 
 const String COLLECTION_COMPANY = "companies";
 const String COLLECTION_CLOSING_DATE = "closing_dates";

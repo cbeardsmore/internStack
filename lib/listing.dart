@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'company_list.dart';
-import 'widgets/gradient_app_bar.dart';
+import 'package:internStack/company_list.dart';
+import 'package:internStack/widgets/gradient_app_bar.dart';
 
 class ListingPage extends StatelessWidget {
   ListingPage({Key key, this.title}) : super(key: key);

@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
-import 'widgets/gradient_app_bar.dart';
-import 'widgets/gradient_bottom_app_bar.dart';
-import 'widgets/curver_corner_card.dart';
-import 'widgets/primary_raised_button_container.dart';
+import 'package:internStack/widgets/gradient_app_bar.dart';
+import 'package:internStack/widgets/gradient_bottom_app_bar.dart';
+import 'package:internStack/widgets/curver_corner_card.dart';
+import 'package:internStack/widgets/primary_raised_button_container.dart';
 
-import 'models/company.dart';
-import 'models/status.dart';
-import 'services/firestore.dart';
-import 'services/dates.dart';
-import 'services/utils.dart';
-import 'services/notifications.dart';
+import 'package:internStack/models/company.dart';
+import 'package:internStack/models/status.dart';
+import 'package:internStack/services/firestore.dart';
+import 'package:internStack/services/dates.dart';
+import 'package:internStack/services/utils.dart';
+import 'package:internStack/services/notifications.dart';
 
 class CompanyWidget extends StatelessWidget {
   final Company company;

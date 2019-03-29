@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'widgets/primary_raised_button_container.dart';
+import 'package:internStack/widgets/primary_raised_button_container.dart';
 
 class EntryPage extends StatelessWidget {
   @override
